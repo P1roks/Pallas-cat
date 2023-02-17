@@ -1,6 +1,7 @@
 #bar{
     #container{
     display:flex;
+    justify-content: space-around;
     gap: 50px;
         img{
             max-height: 40px;
@@ -9,6 +10,10 @@
             display:flex;
             flex-direction: column;
             justify-content: center;
+        }
+        #rhs{
+            a{
+            }
         }
         align-items: center;
         margin: 0 10%;

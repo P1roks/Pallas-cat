@@ -12,7 +12,11 @@ export const Bar = () => {
                     <img src="logo.svg" alt="logo" />
                     <b>Pallas Cat</b>
                 </span>
-                <Search />
+                <span id="rhs">
+                    <Search />
+                    <a href="login">Login</a>
+                    <a href="register">Register</a>
+                </span>
             </div>
         </nav>
     )
@@ -23,17 +27,17 @@ const Search = () => {
 
     return (
         <span id="search">
-            <button id="button_search" onClick={(e) => opacity === 0 ? setOpacity(100) : setOpacity(0)}>
-                <FontAwesomeIcon icon={faMagnifyingGlass} size="xl" />
-            </button>
             <form action="#" id="form_search" method="POST" style={{opacity: opacity}}>
-                <input type="text" name="input_search" id="input_search"
-                placeholder="Wpisz swoje wyszukiwanie..."/>
                 <select name="select_search" id="select_search">
                     <option value="">CDA</option>
                     <option value="">Zaluknij</option>
                 </select>
+                <input type="text" name="input_search" id="input_search"
+                placeholder="Wpisz swoje wyszukiwanie..."/>
             </form>
+            <button id="button_search" onClick={(e) => opacity === 0 ? setOpacity(100) : setOpacity(0)}>
+                <FontAwesomeIcon icon={faMagnifyingGlass} size="xl" />
+            </button>
         </span>
     )
 }
