@@ -1,0 +1,25 @@
+#items{
+    display:grid;
+    grid-template-columns: repeat(5,1fr);
+    gap: 100px;
+    margin: 5% 5%;
+    .item{
+        text-decoration: none;
+    }
+    .item .wrapper{
+        display:flex;
+        img{
+            aspect-ratio: 0.65;
+            max-height: 200px;
+        }
+        .text_wrapper{
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            p{
+                color:black;
+                margin:0;
+            }
+        }
+    }
+}
