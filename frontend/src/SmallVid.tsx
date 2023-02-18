@@ -7,10 +7,10 @@ interface itemProps {
     year: number,
 }
 
-export const Item = ({title,img,year,href}: itemProps) => {
+export const SmallVid = ({title,img,year,href}: itemProps) => {
 
     return (
-        <a className="item" href="#">
+        <a className="item" href={`/watch/${href}`}>
             <span className="wrapper">
                 <img src={img} alt="Cover art" />
                 <span className="text_wrapper">
