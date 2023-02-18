@@ -1,0 +1,26 @@
+from . import cda
+from bs4 import BeautifulSoup
+import json
+import requests
+
+def get_stream_url(url) -> str | None:
+    outer_res = requests.get(f"https://ogladajanime.pl/anime/{url}")
+
+    soup = BeautifulSoup(outer_res.text,"html.parser")
+    episode_id = soup.select("#changePlayerButton")[0]['value']
+
+    episode_url = f"https://ogladajanime.pl/command_manager.php?action=get_player_list&id={episode_id}"
+    headers = {
+            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36',
+            'Referer': 'https://ogladajanime.pl'
+    }
+
+    src_res = requests.post(episode_url,headers=headers)
+    data = json.loads(json.loads(src_res.text)["data"])
+    return cda.get_stream_url(data["url"],full_url=True)
+
+def search_videos(query):
+    url = f"https://ogladajanime.pl/search/name/{query}"
+    res = requests.get(url)
+    
+    soup = BeautifulSoup(res.text,"html.parser")

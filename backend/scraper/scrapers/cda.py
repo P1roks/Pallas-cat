@@ -2,12 +2,15 @@ from bs4 import BeautifulSoup
 import requests
 import json
 
-def get_stream_url(video_id: str) -> str | None:
+def get_stream_url(video_id: str, full_url = False) -> str | None:
     if len(video_id) < 9: return None
 
+    res: requests.Response
     user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36'
     headers = {'User-Agent': user_agent}
-    res = requests.get(f"https://ebd.cda.pl/620x395/{video_id}", headers=headers)
+    get_url = video_id if full_url else f"https://ebd.cda.pl/620x395/{video_id}"
+
+    res = requests.get(get_url, headers=headers)
 
     soup = BeautifulSoup(res.text, 'html.parser')
     div = soup.select('div[player_data]')

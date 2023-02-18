@@ -1,5 +1,5 @@
 from django.http import HttpResponse, JsonResponse
-from .scrapers import cda
+from .scrapers import cda, ogladajanime
 
 """
 Platforms:
@@ -14,7 +14,7 @@ def video(request, platform: int, id: str) -> JsonResponse:
         case 1:
             stream_url = cda.get_stream_url(id)
         case 2:
-            stream_url = "ogladajanime"
+            stream_url = ogladajanime.get_stream_url(id)
         case _:
             stream_url = "error"
 
