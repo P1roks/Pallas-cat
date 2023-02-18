@@ -8,10 +8,10 @@ export const Bar = () => {
     return (
         <nav id="bar">
             <div id="container">
-                <span id="logo">
+                <a id="logo" href="/">
                     <img src="/logo.svg" alt="logo" />
                     <b>Pallas Cat</b>
-                </span>
+                </a>
                 <span id="rhs">
                     <Search />
                     <a href="login">Login</a>
