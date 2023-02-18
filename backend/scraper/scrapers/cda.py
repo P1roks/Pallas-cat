@@ -2,7 +2,9 @@ from bs4 import BeautifulSoup
 import requests
 import json
 
-def get_stream_url(video_id):
+def get_stream_url(video_id: str) -> str | None:
+    if len(video_id) < 9: return None
+
     user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36'
     headers = {'User-Agent': user_agent}
     res = requests.get(f"https://ebd.cda.pl/620x395/{video_id}", headers=headers)
