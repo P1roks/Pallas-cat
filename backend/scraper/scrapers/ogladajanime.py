@@ -17,6 +17,7 @@ def get_stream_url(url) -> str | None:
 
     src_res = requests.post(episode_url,headers=headers)
     data = json.loads(json.loads(src_res.text)["data"])
+    # This scrape goes depper!
     return cda.get_stream_url(data["url"],full_url=True)
 
 def search_videos(query):
@@ -24,3 +25,18 @@ def search_videos(query):
     res = requests.get(url)
     
     soup = BeautifulSoup(res.text,"html.parser")
+    animes = soup.select("#anime_main div")
+    if len(animes) == 0: return None
+
+    links = list()
+    for anime in animes:
+        title_link = anime.select_one(".card-title a")
+        cover = anime.select_one("figure img")
+        if title_link is None or cover is None:
+            continue
+        link = title_link['href']
+        title = title_link.get_text().strip()
+        cover = cover['data-src']
+        links.append({'link': link,'title': title,'cover': cover})
+
+    return json.dumps(links)

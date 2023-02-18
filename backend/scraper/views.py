@@ -23,4 +23,15 @@ def video(request, platform: int, id: str) -> JsonResponse:
     })
 
 def search(request, platform: int, query: str) -> HttpResponse:
-    return HttpResponse(404)
+    videos = str()
+    match platform:
+        case 1:
+            videos = cda.search_videos(query)
+        case 2:
+            videos = ogladajanime.search_videos(query)
+        case _:
+            videos = "error"
+
+    return JsonResponse({
+        'videos': videos
+    })
