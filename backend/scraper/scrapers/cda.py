@@ -10,17 +10,20 @@ def get_stream_url(video_id):
 
     soup = BeautifulSoup(res.text, 'html.parser')
     div = soup.select('div[player_data]')
-    playerData = json.loads(div[0]['player_data'])
-    highestFormat = list(playerData['video']['qualities'].values())[-1]
+
+    raw_player_data = div[0]['player_data']
+    player_data = json.loads(raw_player_data) if type(raw_player_data) is str else json.loads(raw_player_data[0])
+
+    highestFormat = list(player_data['video']['qualities'].values())[-1]
         
     body = {
         "jsonrpc": "2.0",
         "method": "videoGetLink",
         "params": [
-            playerData['video']['id'],
+            player_data['video']['id'],
             highestFormat,
-            playerData['video']['ts'],
-            playerData['video']['hash2'],
+            player_data['video']['ts'],
+            player_data['video']['hash2'],
             {}
         ], 
         "id": 1
