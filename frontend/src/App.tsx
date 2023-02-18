@@ -1,7 +1,4 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
 import { Bar } from './Bar'
-import {FC} from 'react';
 import { Item } from './Item';
 
 function App() {
@@ -15,12 +12,19 @@ function App() {
     <>
       <Bar />
       <div id="items">
-        {items}
-        {items}
-        {items}
-        {items}
-        {items}
-        {items}
+	      <span id="container">
+			{items}
+			{items}
+			{items}
+			{items}
+			{items}
+			{items}
+			{items}
+			{items}
+			{items}
+			{items}
+			{items}
+	      </span>
       </div>
     </>
   )

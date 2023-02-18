@@ -1,19 +1,26 @@
 #bar{
+    height: 10%;
     #container{
     display:flex;
     justify-content: space-around;
     gap: 50px;
         img{
-            max-height: 40px;
+            max-height: 6vh;
         }
         #logo{
             display:flex;
             flex-direction: column;
             justify-content: center;
+	    align-items: center;
         }
         #rhs{
-            a{
-            }
+		display:flex;
+		gap: 20px;
+		align-items: center;
+		a{
+			color:black;
+			text-decoration: none;
+		}
         }
         align-items: center;
         margin: 0 10%;

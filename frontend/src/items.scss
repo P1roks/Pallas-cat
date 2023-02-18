@@ -1,25 +1,31 @@
 #items{
-    display:grid;
-    grid-template-columns: repeat(5,1fr);
-    gap: 100px;
-    margin: 5% 5%;
-    .item{
-        text-decoration: none;
-    }
-    .item .wrapper{
-        display:flex;
-        img{
-            aspect-ratio: 0.65;
-            max-height: 200px;
-        }
-        .text_wrapper{
-            display:flex;
-            flex-direction: column;
-            justify-content: center;
-            p{
-                color:black;
-                margin:0;
-            }
-        }
-    }
+	min-height: 90%;
+	background: linear-gradient(#FFFFFF,#DDDDFF)
+}
+#items #container{
+	display:grid;
+	grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+	gap: 100px;
+	margin: 0 5%;
+	padding-top: 2%;
+	.item{
+		text-decoration: none;
+	}
+	.item .wrapper{
+		display:flex;
+		img{
+			margin-right: 10px;
+			aspect-ratio: 0.65;
+			max-height: 200px;
+		}
+		.text_wrapper{
+			display:flex;
+			flex-direction: column;
+			justify-content: center;
+			p{
+				color:black;
+				margin:0;
+			}
+		}
+	}
 }
