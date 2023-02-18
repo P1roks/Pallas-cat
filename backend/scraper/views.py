@@ -22,5 +22,5 @@ def video(request, platform: int, id: str) -> JsonResponse:
         'streamUrl': stream_url
     })
 
-def search(request, platform: int, query: str):
-    pass
+def search(request, platform: int, query: str) -> HttpResponse:
+    return HttpResponse(404)
