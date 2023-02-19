@@ -27,12 +27,14 @@ export const Bar = () => {
 
 const Search = () => {
     //Visibility can't be fluently transitioned and elems with opacity 0 can be still clicked, so this is the only real solution 
-    const [visibility,setVisibility] = useState("hidden")
-    const [opacity,setOpacity] = useState(0)
+    const [visibility,setVisibility] = useState("hidden");
+    const [opacity,setOpacity] = useState(0);
     const searchQuery = useRef<HTMLInputElement>(null);
+    const navigate = useNavigate();
 
     const search = () => {
-	console.log("TODO")
+    	if(searchQuery.current)
+		navigate(`/search/2/${searchQuery.current.value}`);
     }
 
     const changeVisibility = () => {
@@ -51,10 +53,11 @@ const Search = () => {
 
     return (
         <span id="search">
-            <form action="#" id="form-search" method="POST" style={{visibility: visibility, opacity: opacity} as CSSProperties} onSubmit={() => console.log("submit")}>
+            <form action="#" id="form-search" method="POST" style={{visibility: visibility, opacity: opacity} as CSSProperties} onSubmit={e => {e.preventDefault(); search();}}>
                 <select name="select-search" id="select-search">
-                    <option value="">CDA</option>
-                    <option value="">Zaluknij</option>
+                    <option value="1">CDA</option>
+                    <option value="2">OgladajAnime</option>
+                    <option value="3">Zaluknij</option>
                 </select>
                 <input type="text" name="input_search" id="input-search"
                 placeholder="Wpisz swoje wyszukiwanie..." ref={searchQuery} />
