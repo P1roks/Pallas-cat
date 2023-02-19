@@ -1,8 +1,8 @@
-#items{
+#vidoes{
 	min-height: 90%;
 	background: linear-gradient(#FFFFFF,#DDDDFF)
 }
-#items #container{
+#videos #container{
 	display:grid;
 	grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
 	gap: 100px;

@@ -1,3 +1,4 @@
+import {Link} from "react-router-dom"
 import "./smallVid.scss"
 //TODO: add platform to props
 interface itemProps {
@@ -16,7 +17,7 @@ export enum Platform {
 export const SmallVid = ({title,img,platform,href}: itemProps) => {
 
     return (
-        <a className="small-vid" href={`/watch/${platform}/${href}`}>
+        <Link to="/watch/1/2" className="small-vid">
             <span className="wrapper">
                 <img src={img} alt="Cover art" />
                 <span className="text-wrapper">
@@ -24,6 +25,6 @@ export const SmallVid = ({title,img,platform,href}: itemProps) => {
                     <h6 className="platform">({Platform[platform]})</h6>
                 </span>
             </span>
-        </a>
+        </Link>
     )
 }

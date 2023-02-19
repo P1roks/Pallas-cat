@@ -3,20 +3,22 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import "./bar.scss"
 import {CSSProperties, useEffect, useRef, useState} from 'react';
 import {redirect, useNavigate} from "react-router";
+import {Link, NavLink} from "react-router-dom";
 
 export const Bar = () => {
 
+//TODO: change a to NavLink
     return (
         <nav id="bar">
             <div id="container">
-                <a id="logo" href="/">
+                <NavLink to="/" id="logo">
                     <img src="/logo.svg" alt="logo" />
                     <b>Pallas Cat</b>
-                </a>
+                </NavLink>
                 <span id="rhs">
                     <Search />
-                    <a href="login">Login</a>
-                    <a href="register">Register</a>
+                    <NavLink to="/login">Login</NavLink>
+                    <NavLink to="/register">Register</NavLink>
                 </span>
             </div>
         </nav>

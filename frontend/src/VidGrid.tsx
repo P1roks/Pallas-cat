@@ -8,8 +8,9 @@ export const VidGrid = () => {
   let videos = [<SmallVid href="3" title='test' img="https://i1.sndcdn.com/artworks-W8KXhQeXZrv2YSJO-ctOyHA-t500x500.jpg" platform={1} />,
   <SmallVid href="2" title='test2' img="https://bonito.pl/cache/1/976fb37-heartstopper-volume-_400.webp" platform={2} />]
 
+console.log("vidgrid")
   return (
-      <div id="items">
+      <div id="videos">
 	      <span id="container">
 			{videos}
 			{videos}
