@@ -7,3 +7,20 @@
 	}
 	//TODO: Make own player
 }
+#err{
+	display:flex;
+	height: 89%;
+	align-items: center;
+	justify-content: center;
+	color:red;
+	span{
+		text-align: center;
+		a{
+			text-decoration: none;
+			color:blue;
+		}
+	}
+	img{
+		min-width: 50%;
+	}
+}

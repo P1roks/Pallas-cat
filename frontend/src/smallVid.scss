@@ -29,6 +29,11 @@
 			h6{
 				font-size: .9rem;
 			}
+			.title{
+				overflow-y: hidden;
+				text-overflow: ellipsis;
+				max-height: 10.5ch;
+			}
 		}
 	}
 }
