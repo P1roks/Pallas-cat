@@ -1,5 +1,5 @@
-import {useEffect, useState} from "react";
 import {useLoaderData} from "react-router";
+import {Link} from "react-router-dom";
 import "./video.scss"
 
 export const Video = () => {
@@ -16,5 +16,11 @@ export const Video = () => {
 }
 
 export const VideoErr = () => (
-	<h1 id="err"> Przepraszamy, ale to video nie jest dostępne! </h1>
+	<div id="err">
+		<img src="/notFound.svg" alt="Error picture"/>
+		<span>
+			<h1> Przepraszamy, ale to video nie jest dostępne! </h1>
+			<Link to="/"> Powrót na stronę główną </Link>
+		</span>
+	</div>
 )
