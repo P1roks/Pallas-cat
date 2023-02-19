@@ -33,5 +33,5 @@ def search(request, platform: int, query: str) -> HttpResponse:
             videos = "error"
 
     return JsonResponse({
-        'videos': videos
+            "videos": videos,
     })

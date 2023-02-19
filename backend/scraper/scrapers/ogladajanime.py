@@ -25,7 +25,7 @@ def search_videos(query):
     res = requests.get(url)
     
     soup = BeautifulSoup(res.text,"html.parser")
-    animes = soup.select("#anime_main div")
+    animes = soup.select("#anime_main > div")
     if len(animes) == 0: return None
 
     links = list()
@@ -34,7 +34,8 @@ def search_videos(query):
         cover = anime.select_one("figure img")
         if title_link is None or cover is None:
             continue
-        link = title_link['href']
+        link_arr = title_link['href']
+        link = "".join(link_arr).split("/")[-1]
         title = title_link.get_text().strip()
         cover = cover['data-src']
         links.append({'link': link,'title': title,'cover': cover})

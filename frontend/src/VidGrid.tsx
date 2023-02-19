@@ -1,30 +1,25 @@
-import { Bar } from './Bar'
-import { Platform, SmallVid } from './SmallVid';
+import {useLoaderData} from "react-router"
+import {SmallVid} from "./SmallVid";
+
+interface Video {
+	link: string,
+	title: string,
+	cover: string,
+}
 
 export const VidGrid = () => {
-  //TODO: display items based off users search result
-  // let items = fetch(...)
+	const {platform,videos} = useLoaderData() as any;
+	const videosJSON: Video[] = JSON.parse(videos)
 
-  let videos = [<SmallVid href="3" title='test' img="https://i1.sndcdn.com/artworks-W8KXhQeXZrv2YSJO-ctOyHA-t500x500.jpg" platform={1} />,
-  <SmallVid href="2" title='test2' img="https://bonito.pl/cache/1/976fb37-heartstopper-volume-_400.webp" platform={2} />]
+	let smallVids = videosJSON.map(
+	(vid,idx) => <SmallVid platform={platform} img={vid.cover} title={vid.title} href={vid.link} key={idx} />)
 
-console.log("vidgrid")
-  return (
-      <div id="videos">
-	      <span id="container">
-			{videos}
-			{videos}
-			{videos}
-			{videos}
-			{videos}
-			{videos}
-			{videos}
-			{videos}
-			{videos}
-			{videos}
-			{videos}
-	      </span>
-      </div>
-  )
+	return (
+		<div id="videos">
+			<span id="container">
+				{smallVids}
+			</span>
+		</div>
+	)
 }
 

@@ -1,7 +1,7 @@
 import {Link} from "react-router-dom"
 import "./smallVid.scss"
 //TODO: add platform to props
-interface itemProps {
+interface VidProps {
     title: string,
     img: string,
     href: string,
@@ -14,10 +14,10 @@ export enum Platform {
 	Zaluknij,
 }
 
-export const SmallVid = ({title,img,platform,href}: itemProps) => {
+export const SmallVid = ({title,img,platform,href}: VidProps) => {
 
     return (
-        <Link to="/watch/1/2" className="small-vid">
+        <Link to={`/watch/${platform}/${href}`} className="small-vid">
             <span className="wrapper">
                 <img src={img} alt="Cover art" />
                 <span className="text-wrapper">

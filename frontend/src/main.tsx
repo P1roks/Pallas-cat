@@ -22,8 +22,18 @@ const router = createBrowserRouter([{
 		},
 		{
 			//TODO: Make it possible to search, but first need to make that option fully functional in the backend
-			path: "search",
+			path: "search/:platform/:query",
 			element: <VidGrid />,
+			loader: async({params}) => {
+				 //TEMP URL
+				 return fetch(`http://127.0.0.1:8000/api/search/${params.platform}/${params.query}`).then(async (res: Response) => {
+					if(!res.ok)
+						throw new Error(`HTTP err: ${res.status}`)
+
+					let data = await res.json();
+					return {videos: data.videos, platform: params.platform}
+					})
+			},
 		},
 		{
 			//TODO: fetch given id, and use it as props for the Video component
