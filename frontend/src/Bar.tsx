@@ -30,11 +30,13 @@ const Search = () => {
     const [visibility,setVisibility] = useState("hidden");
     const [opacity,setOpacity] = useState(0);
     const searchQuery = useRef<HTMLInputElement>(null);
+    const selectPlatfom = useRef<HTMLSelectElement>(null);
     const navigate = useNavigate();
 
     const search = () => {
-    	if(searchQuery.current)
-		navigate(`/search/2/${searchQuery.current.value}`);
+    	if(searchQuery.current && selectPlatfom.current) {
+            navigate(`/search/${selectPlatfom.current.value}/${searchQuery.current.value}`);
+        }
     }
 
     const changeVisibility = () => {
@@ -43,18 +45,18 @@ const Search = () => {
 		setOpacity(100)
 	}
 	else{
-	//This had to be done so the transition takes effect
+	    //This had to be done so the transition takes effect
 		setOpacity(0);
 		setTimeout(function(){
 			setVisibility("hidden")
 		},500)
-	}
+	    }
     }
 
     return (
         <span id="search">
             <form action="#" id="form-search" method="POST" style={{visibility: visibility, opacity: opacity} as CSSProperties} onSubmit={e => {e.preventDefault(); search();}}>
-                <select name="select-search" id="select-search">
+                <select name="select-search" id="select-search" ref={selectPlatfom}>
                     <option value="1">CDA</option>
                     <option value="2">OgladajAnime</option>
                     <option value="3">Zaluknij</option>
