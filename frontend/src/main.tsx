@@ -16,8 +16,8 @@ const router = createBrowserRouter([{
 			path: "/",
 			element: <div style={{display: "flex",justifyContent:"center",alignItems:"Center", flexDirection: "column"}}>
 				<h1>TODO: insert Random vidoes here</h1>
-				<Link to="/search">search</Link>
-				<Link to="/watch/1/1">watch</Link>
+				<Link to="/search">search test</Link>
+				<Link to="/watch/1/578237997">watch test</Link>
 			</div>
 		},
 		{
