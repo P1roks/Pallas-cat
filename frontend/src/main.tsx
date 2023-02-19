@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom/client'
 import {createBrowserRouter, Link, Outlet, RouterProvider} from 'react-router-dom'
 import {Bar} from './Bar'
 import './index.scss'
-import {Video} from './Video'
+import {Video, VideoErr} from './Video'
 import {VidGrid} from './VidGrid'
 
 const router = createBrowserRouter([{
@@ -21,7 +21,6 @@ const router = createBrowserRouter([{
 			</div>
 		},
 		{
-			//TODO: Make it possible to search, but first need to make that option fully functional in the backend
 			path: "search/:platform/:query",
 			element: <VidGrid />,
 			loader: async({params}) => {
@@ -36,9 +35,9 @@ const router = createBrowserRouter([{
 			},
 		},
 		{
-			//TODO: fetch given id, and use it as props for the Video component
 			path: "watch/:platform/:id",
 			element: <Video />,
+			errorElement: <VideoErr />,
 			loader: async({params}) => {
 			 //TEMP URL
 			 return fetch(`http://127.0.0.1:8000/api/video/${params.platform}/${params.id}`).then(async (res: Response) => {

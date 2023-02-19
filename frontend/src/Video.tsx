@@ -15,3 +15,6 @@ export const Video = () => {
 	)
 }
 
+export const VideoErr = () => (
+	<h1 id="err"> Przepraszamy, ale to video nie jest dostępne! </h1>
+)

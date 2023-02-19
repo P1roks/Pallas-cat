@@ -18,7 +18,12 @@ def get_stream_url(url) -> str | None:
     src_res = requests.post(episode_url,headers=headers)
     data = json.loads(json.loads(src_res.text)["data"])
     # This scrape goes depper!
-    return cda.get_stream_url(data["url"],full_url=True)
+    if 'ebd.cda' in data['url']:
+        return cda.get_stream_url(data["url"],full_url=True)
+    else:
+        #TODO
+        return data['url']
+
 
 def search_videos(query):
     url = f"https://ogladajanime.pl/search/name/{query}"
