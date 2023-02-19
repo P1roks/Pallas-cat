@@ -28,7 +28,17 @@ const router = createBrowserRouter([{
 		{
 			//TODO: fetch given id, and use it as props for the Video component
 			path: "watch/:platform/:id",
-			element: <Video title="t" source="https://vwaw401.cda.pl/XOjwD6_oDljbXiTa3CD_Bg/1676804262/sdba6eb9a5e5181066bb9321c4c58a5821.mp4" />
+			element: <Video />,
+			loader: async({params}) => {
+			 //TEMP URL
+			 return fetch(`http://127.0.0.1:8000/api/video/${params.platform}/${params.id}`).then(async (res: Response) => {
+				if(!res.ok)
+					throw new Error(`HTTP err: ${res.status}`)
+
+				let data = await res.json();
+				return {source: data.streamUrl}
+				})
+			},
 		}]
 	}])
 
