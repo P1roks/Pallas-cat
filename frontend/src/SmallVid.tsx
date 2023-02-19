@@ -1,21 +1,27 @@
-import "./items.scss"
+import "./smallVid.scss"
 //TODO: add platform to props
 interface itemProps {
     title: string,
     img: string,
     href: string,
-    year: number,
+    platform: Platform,
 }
 
-export const SmallVid = ({title,img,year,href}: itemProps) => {
+export enum Platform {
+	CDA = 1,
+	OgladajAnime,
+	Zaluknij,
+}
+
+export const SmallVid = ({title,img,platform,href}: itemProps) => {
 
     return (
-        <a className="item" href={`/watch/${href}`}>
+        <a className="small-vid" href={`/watch/${platform}/${href}`}>
             <span className="wrapper">
                 <img src={img} alt="Cover art" />
-                <span className="text_wrapper">
+                <span className="text-wrapper">
                     <p className="title">{title}</p>
-                    <p className="year">({year})</p>
+                    <h6 className="platform">({Platform[platform]})</h6>
                 </span>
             </span>
         </a>

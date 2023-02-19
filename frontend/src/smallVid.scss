@@ -8,23 +8,26 @@
 	gap: 100px;
 	margin: 0 5%;
 	padding-top: 2%;
-	.item{
+	.small-vid{
 		text-decoration: none;
 	}
-	.item .wrapper{
+	.small-vid .wrapper{
 		display:flex;
 		img{
 			margin-right: 10px;
 			aspect-ratio: 0.65;
 			max-height: 200px;
 		}
-		.text_wrapper{
+		.text-wrapper{
 			display:flex;
 			flex-direction: column;
 			justify-content: center;
-			p{
+			& > *{
 				color:black;
 				margin:0;
+			}
+			h6{
+				font-size: .9rem;
 			}
 		}
 	}

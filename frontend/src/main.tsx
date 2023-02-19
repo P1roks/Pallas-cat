@@ -12,9 +12,10 @@ const router = createBrowserRouter([{
 },
 {
 	//TODO: fetch given id, and use it as props for the Video component
-	path: "/watch/:id",
-	element: <Video title="Test" source="https://vwaw401.cda.pl/XOjwD6_oDljbXiTa3CD_Bg/1676804262/sdba6eb9a5e5181066bb9321c4c58a5821.mp4" />
+	path: "/watch/:platform/:id",
+	element: <Video title="t" source="https://vwaw401.cda.pl/XOjwD6_oDljbXiTa3CD_Bg/1676804262/sdba6eb9a5e5181066bb9321c4c58a5821.mp4" />
 }])
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<>
 		<Bar />
