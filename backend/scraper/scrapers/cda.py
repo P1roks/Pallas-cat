@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 import json
+import re
 
 def get_stream_url(video_id: str, full_url = False) -> str | None:
     if len(video_id) < 9: return None
@@ -65,6 +66,8 @@ def search_videos(query):
             continue
 
         link = link_tag['href']
+        if type(link) is not str:
+            continue
 
         cover_tag = video_clip.select_one('.video-clip-image')
         if cover_tag is None:
@@ -72,10 +75,14 @@ def search_videos(query):
 
         cover = cover_tag['src']
 
+        pattern = re.compile(r'video\/(\w+)')
+        id = pattern.findall(link)
+
         links.append({ 
-            'link': link, 
+            'link': id[0], 
             'title': title, 
             'cover': cover 
         })
+
 
     return json.dumps(links)
