@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import include, path
 
 apipatterns = [
+    path('', include('accounts.urls')),
     path('', include('scraper.urls'))
 ]
 
