@@ -45,7 +45,7 @@ const router = createBrowserRouter([{
 					throw new Error(`HTTP err: ${res.status}`)
 
 				let data = await res.json();
-				return {source: data.streamUrl}
+				return {source: data.streamUrl, embeddable: data.embeddable}
 				})
 			},
 		}]

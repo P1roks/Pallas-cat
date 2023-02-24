@@ -6,9 +6,11 @@
 	#title{
 		font-size: 3rem;
 	}
+	video,#player-holder{
+		height: 70%;
+	}
 	#player-holder{
 		aspect-ratio: 2 / 1;
-		height: 70%;
 		background: url(/loading.gif) center center no-repeat;
 		background-color: #F1F2F3;
 		iframe{

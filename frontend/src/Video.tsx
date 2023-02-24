@@ -3,15 +3,18 @@ import {Link} from "react-router-dom";
 import "./video.scss"
 
 export const Video = () => {
-	const {source} = useLoaderData() as {source: string};
-	console.log(source)
+	const {source,embeddable} = useLoaderData() as {source: string,embeddable: boolean};
+	console.log(source,embeddable)
 
 	return (
 		<div id="player">
 			<h1 id="title">title</h1>
-			<div id="player-holder">
-				<iframe src={source}></iframe>
-			</div>
+			{embeddable ? 
+				<video src={source} controls></video> :
+				<div id="player-holder">
+					<iframe src={source}></iframe>  
+				</div>
+			}
 		</div>
 	)
 }

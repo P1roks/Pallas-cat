@@ -9,18 +9,24 @@ Platforms:
 """
 
 def video(request, platform: int, id: str) -> JsonResponse:
-    stream_url = str()
+    res: tuple[str,bool] | None
     match platform:
         case 1:
-            stream_url = cda.get_stream_url(id)
+            res = cda.get_stream_url(id)
         case 2:
-            stream_url = ogladajanime.get_stream_url(id)
+            res = ogladajanime.get_stream_url(id)
         case _:
-            stream_url = "error"
+            res = ("err",False)
 
-    return JsonResponse({
-        'streamUrl': stream_url
-    })
+    if res is not None:
+        stream_url, embeddable = res
+        return JsonResponse({
+            'streamUrl': stream_url, 'embeddable': embeddable
+        })
+    else:
+        return JsonResponse({
+            'streamUrl': None, 'embeddable': None
+        })
 
 def search(request, platform: int, query: str) -> HttpResponse:
     videos = str()

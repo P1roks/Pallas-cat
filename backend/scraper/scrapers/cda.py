@@ -3,7 +3,7 @@ import requests
 import json
 import re
 
-def get_stream_url(video_id: str, full_url = False) -> str | None:
+def get_stream_url(video_id: str, full_url = False) -> tuple[str,bool] | None:
     if not full_url:
         pattern = re.compile(r'^[a-z0-9]{8,}$')
         id_check = pattern.findall(video_id)
@@ -42,7 +42,7 @@ def get_stream_url(video_id: str, full_url = False) -> str | None:
     headers['Content-Type'] = 'application/json'
     res1 = requests.post("https://www.cda.pl/", data=json.dumps(body), headers=headers)
     data = json.loads(res1.text)
-    return data['result']['resp']
+    return (data['result']['resp'],True)
 
 def search_videos(query):
     res: requests.Response

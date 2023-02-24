@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import json
 import requests
 
-def get_stream_url(url) -> str | None:
+def get_stream_url(url) -> tuple[str,bool] | None:
     outer_res = requests.get(f"https://ogladajanime.pl/anime/{url}")
 
     soup = BeautifulSoup(outer_res.text,"html.parser")
@@ -19,10 +19,10 @@ def get_stream_url(url) -> str | None:
     data = json.loads(json.loads(src_res.text)["data"])
     # This scrape goes depper!
     if 'ebd.cda' in data['url']:
-        return cda.get_stream_url(data["url"],full_url=True)
+        return cda.get_stream_url(data['url'],full_url=True)
     else:
         #TODO
-        return data['url']
+        return (data['url'],False)
 
 
 def search_videos(query):
