@@ -4,9 +4,10 @@ import json
 import re
 
 def get_stream_url(video_id: str, full_url = False) -> str | None:
-    pattern = re.compile(r'^[a-z0-9]{8,}$')
-    id_check = pattern.findall(video_id)
-    if len(id_check) == 0: return None
+    if not full_url:
+        pattern = re.compile(r'^[a-z0-9]{8,}$')
+        id_check = pattern.findall(video_id)
+        if len(id_check) == 0: return None
 
     res: requests.Response
     user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36'

@@ -4,13 +4,14 @@ import "./video.scss"
 
 export const Video = () => {
 	const {source} = useLoaderData() as {source: string};
-	// const [state,setState] = useState("");
+	console.log(source)
 
 	return (
 		<div id="player">
 			<h1 id="title">title</h1>
-			<video src={source} controls>
-			</video>
+			<div id="player-holder">
+				<iframe src={source}></iframe>
+			</div>
 		</div>
 	)
 }
