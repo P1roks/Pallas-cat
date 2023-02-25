@@ -59,7 +59,7 @@ const Search = () => {
                 <select name="select-search" id="select-search" ref={selectPlatfom}>
                     <option value="1">CDA</option>
                     <option value="2">OgladajAnime</option>
-                    <option value="3">Zaluknij</option>
+                    <option value="3">hdbest</option>
                 </select>
                 <input type="text" name="input_search" id="input-search"
                 placeholder="Wpisz swoje wyszukiwanie..." ref={searchQuery} />

@@ -11,7 +11,7 @@ interface VidProps {
 export enum Platform {
 	CDA = 1,
 	OgladajAnime,
-	Zaluknij,
+	hdbest,
 }
 
 export const SmallVid = ({title,img,platform,href}: VidProps) => {

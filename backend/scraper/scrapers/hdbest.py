@@ -36,7 +36,7 @@ def search_videos(query):
 
         cover = clip.select_one('.post-thumbnail img')
         if cover is not None:
-            cover = cover['data-src'][2:]
+            cover = "https://" + str(cover['data-src'][2:])
 
         links.append({'link': link,'title': title,'cover': cover})
 
