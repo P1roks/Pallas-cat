@@ -1,6 +1,7 @@
 import "./login.scss"
 
 //TODO: add onlcick so that is actually works and not just only looks
+//TODO: (?) add link to register
 export const Login = () => (
 	<form action="#" id="login">
 		<label htmlFor="username">Email:</label>
@@ -10,6 +11,5 @@ export const Login = () => (
 		<input type="password" name="password" id="password"/>
 
 		<button id="login-button">Zaloguj się</button>
-		Nie masz konta? <a href="/register">Zarejestruj się</a>
 	</form>	
 )

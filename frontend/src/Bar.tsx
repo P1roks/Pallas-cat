@@ -1,9 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import "./bar.scss"
-import {CSSProperties, useRef, useState} from 'react';
+import {CSSProperties, ReactElement, useRef, useState} from 'react';
 import {useNavigate} from "react-router";
 import {NavLink} from "react-router-dom";
+import {Popup} from "./Popup";
+import {Login} from "./Login";
+import {Register} from "./Register";
 
 export const Bar = () => {
 
@@ -17,8 +20,8 @@ export const Bar = () => {
                 </NavLink>
                 <span id="rhs">
                     <Search />
-                    <NavLink to="/login">Login</NavLink>
-                    <NavLink to="/register">Register</NavLink>
+		    <LogReg title="Login" elem={<Login />} />
+		    <LogReg title="Register" elem={<Register />} />
                 </span>
             </div>
         </nav>
@@ -69,4 +72,17 @@ const Search = () => {
             </button>
         </span>
     )
+}
+
+const LogReg = ({title,elem}: {title: string, elem: ReactElement}) => {
+	const [toggled,setToggle] = useState(false)
+
+	return (
+		<>
+			<p onClick={() => setToggle(!toggled)} style={{cursor:"pointer"}} >{title}</p>	
+			{
+				toggled && <Popup title={title} onClose={() => setToggle(false)}>{elem}</Popup>
+			}
+		</>
+	)
 }

@@ -2,20 +2,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import {ReactElement} from 'react'
 import './popup.scss'
-import {useNavigate} from "react-router"
 
 
-export const Popup = (props: {children: ReactElement,title: string}) => {
-	//TODO: actual popup and not just subdomain
-	const navigate = useNavigate();
-	function disablePopup(){
-		navigate("/")
-	}
-
+export const Popup = (props: {children: ReactElement,title: string, onClose: any}) => {
 	return (
 		<div id="popup">
 			<div id="box">
-				<FontAwesomeIcon icon={faXmark} color="red" id="close" onClick={disablePopup} />
+				<FontAwesomeIcon icon={faXmark} color="red" id="close" onClick={props.onClose} />
 				<h1 id="title">{props.title}</h1>
 				{props.children}
 			</div>

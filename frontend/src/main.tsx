@@ -51,16 +51,7 @@ const router = createBrowserRouter([{
 				return {source: data.streamUrl, embeddable: data.embeddable}
 				})
 			},
-		},
-		{
-			path: "login",
-			element: <Popup title="Login"><Login /></Popup>,
-		},
-		{
-			path: "register",
-			element: <Popup title="Register"><Register /></Popup>,
-		}
-		]
+		}]
 	}])
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
