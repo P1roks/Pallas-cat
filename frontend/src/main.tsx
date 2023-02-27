@@ -2,6 +2,9 @@ import ReactDOM from 'react-dom/client'
 import {createBrowserRouter, Link, Outlet, RouterProvider} from 'react-router-dom'
 import {Bar} from './Bar'
 import './index.scss'
+import {Login} from './Login'
+import {Popup} from './Popup'
+import {Register} from './Register'
 import {Video, VideoErr} from './Video'
 import {VidGrid} from './VidGrid'
 
@@ -48,7 +51,16 @@ const router = createBrowserRouter([{
 				return {source: data.streamUrl, embeddable: data.embeddable}
 				})
 			},
-		}]
+		},
+		{
+			path: "login",
+			element: <Popup title="Login"><Login /></Popup>,
+		},
+		{
+			path: "register",
+			element: <Popup title="Register"><Register /></Popup>,
+		}
+		]
 	}])
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(

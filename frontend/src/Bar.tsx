@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import "./bar.scss"
-import {CSSProperties, useEffect, useRef, useState} from 'react';
-import {redirect, useNavigate} from "react-router";
-import {Link, NavLink} from "react-router-dom";
+import {CSSProperties, useRef, useState} from 'react';
+import {useNavigate} from "react-router";
+import {NavLink} from "react-router-dom";
 
 export const Bar = () => {
 
