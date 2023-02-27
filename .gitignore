@@ -26,3 +26,4 @@ yarn-error.log*
 __pycache__/
 .vscode/
 *.sqlite3
+*.env*
