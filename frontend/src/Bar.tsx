@@ -2,15 +2,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import "./bar.scss"
 import {CSSProperties, ReactElement, useRef, useState} from 'react';
-import {useNavigate} from "react-router";
+import {useLoaderData, useNavigate} from "react-router";
 import {NavLink} from "react-router-dom";
 import {Popup} from "./Popup";
 import {Login} from "./Login";
 import {Register} from "./Register";
 
 export const Bar = () => {
+    let {isLogged} = useLoaderData() as {isLogged: boolean}
 
-//TODO: change a to NavLink
     return (
         <nav id="bar">
             <div id="container">
@@ -20,8 +20,14 @@ export const Bar = () => {
                 </NavLink>
                 <span id="rhs">
                     <Search />
-		    <LogReg title="Login" elem={<Login />} />
-		    <LogReg title="Register" elem={<Register />} />
+		    {isLogged ?
+				      <p>TODO: logged user component</p>
+			      :
+				<>
+				    <LogReg title="Login" elem={<Login />} />
+				    <LogReg title="Register" elem={<Register />} />
+				</>
+		    }
                 </span>
             </div>
         </nav>
