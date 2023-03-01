@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom/client'
-import {createBrowserRouter, Link, Outlet, RouterProvider} from 'react-router-dom'
+import {createBrowserRouter, Link, Outlet, redirect, RouterProvider, useLocation, useNavigate} from 'react-router-dom'
 import {Bar} from './Bar'
 import './index.scss'
 import {Login} from './Login'
@@ -8,15 +8,21 @@ import {Register} from './Register'
 import {Video, VideoErr} from './Video'
 import {VidGrid} from './VidGrid'
 
-const router = createBrowserRouter([{
+async function logout(){
+	fetch("http://127.0.0.1:8000/api/logout/")
+}
+
+const router = createBrowserRouter([
+	{
 	path:"/",
 	element: (<>
 		<Bar />
 		<Outlet />
 		</>),
 		loader: async() => {
-
-			//TODO: make this actually work
+			let isLogged = await fetch("http://127.0.0.1:8000/api/check/").then(res => res.text()).then(txt => JSON.parse(txt))
+			console.log(isLogged)
+			return {isLogged: isLogged.logged}
 			return {isLogged: false}
 		},
 		children: [
@@ -26,6 +32,7 @@ const router = createBrowserRouter([{
 					<h1>TODO: insert Random vidoes here</h1>
 					<Link to="/search">search test</Link>
 					<Link to="/watch/1/578237997">watch test</Link>
+					<button onClick={logout}>logout</button>
 				</div>,
 			},
 			{
@@ -63,12 +70,13 @@ const router = createBrowserRouter([{
 				action: async({request}) => {
 					const formData = await request.formData()
 
-					let username = formData.get("username")
-					let password = formData.get("password")
+					let status = await fetch(`http://127.0.0.1:8000/api/login/`, {
+						method: "post",
+						body: formData,
+					}).then(res => res.text())
+					console.log(status)
 
-					//TODO: send this to appropriate endpoint
-
-					return Promise<0>
+					return redirect("/")
 				}
 			},
 			{
@@ -77,13 +85,13 @@ const router = createBrowserRouter([{
 				action: async({request}) => {
 					let formData = await request.formData();
 
-					let nickname  = formData.get("nickname")
-					let email     = formData.get("email")
-					let password  = formData.get("password")
-					let passwordR = formData.get("passwordR")
+					let status = await fetch(`http://127.0.0.1:8000/api/register/`, {
+						method: "post",
+						body: formData,
+					}).then(res => res.text())
+					console.log(status)
 
-					//TODO: send this to appropriate endpoint
-					return Promise<0>
+					return null
 				}
 			}]
 	}])

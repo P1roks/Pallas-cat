@@ -29,9 +29,16 @@ def login_view(request) -> JsonResponse:
 
 def is_logged(request) -> JsonResponse:
     if not request.user.is_authenticated:
-        return JsonResponse({ "message": "not logged" })
+        return JsonResponse({ "logged": False })
     else: 
-        return JsonResponse({ "message": "logged", "is_active": request.user.is_active })
+        return JsonResponse({ "logged": True, "is_active": request.user.is_active })
+
+def logout(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({ "message": True})
+    else: 
+        logout(request)
+        return JsonResponse({ "message": False})
 
 @csrf_exempt
 @require_http_methods(["POST"])
@@ -42,7 +49,8 @@ def signup(request):
     if email is not None and username is not None and password is not None:  
         user = User.objects.create_user(email=email, username=username, password=password, is_active=False)
         
-        return HttpResponse('You are successfully signed in!')
+        # return HttpResponse('You are successfully signed in!')
+        return JsonResponse({"email": email, "pass": password})
         # current_site = get_current_site(request)  
         # mail_subject = 'PallasCat: Activation link'  
         # message = render_to_string('acc_active_email.html', {  
