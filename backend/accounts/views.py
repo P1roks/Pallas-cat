@@ -35,10 +35,10 @@ def is_logged(request) -> JsonResponse:
 
 def logout(request):
     if not request.user.is_authenticated:
-        return JsonResponse({ "message": True})
+        return JsonResponse({ "loggedOut": False})
     else: 
         logout(request)
-        return JsonResponse({ "message": False})
+        return JsonResponse({ "loggedOut": True})
 
 @csrf_exempt
 @require_http_methods(["POST"])

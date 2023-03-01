@@ -8,11 +8,22 @@
 	gap: 100px;
 	margin: 0 5%;
 	padding-top: 2%;
-	.small-vid{
-		text-decoration: none;
+	.wrapper{
+		position:relative;
+		&:hover > .icon{
+			opacity:100;
+		}
+		.icon{
+			position: absolute;
+			z-index: 1;
+			cursor: pointer;
+			opacity: 0;
+			transition: opacity .5s;
+		}
 	}
-	.small-vid .wrapper{
+	.wrapper .small-vid{
 		display:flex;
+		text-decoration: none;
 		img{
 			margin-right: 10px;
 			aspect-ratio: 0.65;

@@ -1,9 +1,9 @@
 import ReactDOM from 'react-dom/client'
-import {createBrowserRouter, Link, Outlet, redirect, RouterProvider, useLocation, useNavigate} from 'react-router-dom'
+import {createBrowserRouter, Link, Outlet, redirect, RouterProvider} from 'react-router-dom'
+import {Account} from './Account'
 import {Bar} from './Bar'
 import './index.scss'
 import {Login} from './Login'
-import {Popup} from './Popup'
 import {Register} from './Register'
 import {Video, VideoErr} from './Video'
 import {VidGrid} from './VidGrid'
@@ -22,8 +22,8 @@ const router = createBrowserRouter([
 		loader: async() => {
 			let isLogged = await fetch("http://127.0.0.1:8000/api/check/").then(res => res.text()).then(txt => JSON.parse(txt))
 			console.log(isLogged)
-			return {isLogged: isLogged.logged}
-			return {isLogged: false}
+			// return {isLogged: isLogged.logged}
+			return {isLogged: true}
 		},
 		children: [
 			{
@@ -63,6 +63,10 @@ const router = createBrowserRouter([
 					return {source: data.streamUrl, embeddable: data.embeddable}
 					})
 				},
+			},
+			{
+				path: "account",
+				element: <Account />
 			},
 			{
 				path: "login",
