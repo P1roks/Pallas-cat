@@ -8,7 +8,7 @@ export const User = ({name}: {name: string}) => {
 	const navigate = useNavigate()
 	const logout = useCallback(() => {
 		let tryLogout = async() => {
-			let status = await fetch("http://127.0.0.1:8000/api/logout/")
+			let status = await fetch("http://127.0.0.1:8000/api/logout/",{credentials: "include"})
 			.then(res => res.text())
 			.then(txt => JSON.parse(txt).loggedOut as {loggedOut: boolean})
 
@@ -20,7 +20,7 @@ export const User = ({name}: {name: string}) => {
 	return (
 		<div id="user-icon">
 			<Link to="/account" id="acc-link">
-				<FontAwesomeIcon icon={faUser} />
+				<FontAwesomeIcon icon={faUser} id="icon" />
 				<p>{name}</p>
 			</Link>
 			<p onClick={logout} id="logout-button">Wyloguj się</p>

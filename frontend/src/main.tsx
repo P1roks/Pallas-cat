@@ -20,10 +20,11 @@ const router = createBrowserRouter([
 		<Outlet />
 		</>),
 		loader: async() => {
-			let isLogged = await fetch("http://127.0.0.1:8000/api/check/").then(res => res.text()).then(txt => JSON.parse(txt))
+			let isLogged = await fetch("http://127.0.0.1:8000/api/check/",{credentials: "include"})
+			.then(res => res.text()).then(txt => JSON.parse(txt))
 			console.log(isLogged)
-			// return {isLogged: isLogged.logged}
-			return {isLogged: true}
+			return {isLogged: isLogged.logged}
+			// return {isLogged: true}
 		},
 		children: [
 			{
@@ -76,9 +77,10 @@ const router = createBrowserRouter([
 
 					let status = await fetch(`http://127.0.0.1:8000/api/login/`, {
 						method: "post",
+						credentials: "include",
 						body: formData,
-					}).then(res => res.text())
-					console.log(status)
+					})
+					console.log(status.headers)
 
 					return redirect("/")
 				}
@@ -91,6 +93,7 @@ const router = createBrowserRouter([
 
 					let status = await fetch(`http://127.0.0.1:8000/api/register/`, {
 						method: "post",
+						credentials: "include",
 						body: formData,
 					}).then(res => res.text())
 					console.log(status)

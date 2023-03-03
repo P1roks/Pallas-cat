@@ -1,7 +1,8 @@
+from http.client import HTTPResponse
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.views.decorators.http import require_http_methods
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse  
 from django.shortcuts import render, redirect  
 from django.contrib.auth import login, authenticate  
@@ -18,12 +19,16 @@ from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 @require_http_methods(["POST"])
 def login_view(request) -> JsonResponse:
-    email = request.POST.get("email")
+    username = request.POST.get("email")
     password = request.POST.get("password")
-    user = authenticate(email=email, password=password)
+    user = authenticate(request=request,username=username,password=password)
+    # user = User.objects.get(email=email)
+
     if user is not None:
         login(request, user)
-        return JsonResponse({ "message": "ok" })
+        res = JsonResponse({ "message": "ok" })
+        res.set_cookie('test','1')
+        return res
     else:
         return JsonResponse({ "message": "not ok" })
 
@@ -33,7 +38,7 @@ def is_logged(request) -> JsonResponse:
     else: 
         return JsonResponse({ "logged": True, "is_active": request.user.is_active })
 
-def logout(request):
+def logout_view(request):
     if not request.user.is_authenticated:
         return JsonResponse({ "loggedOut": False})
     else: 
@@ -46,25 +51,25 @@ def signup(request):
     email = request.POST.get("email")
     username = request.POST.get("username")
     password = request.POST.get("password")
-    if email is not None and username is not None and password is not None:  
-        user = User.objects.create_user(email=email, username=username, password=password, is_active=False)
-        
-        # return HttpResponse('You are successfully signed in!')
-        return JsonResponse({"email": email, "pass": password})
-        # current_site = get_current_site(request)  
-        # mail_subject = 'PallasCat: Activation link'  
-        # message = render_to_string('acc_active_email.html', {  
-        #     'user': user,  
-        #     'domain': current_site.domain,  
-        #     'uid': urlsafe_base64_encode(force_bytes(user.pk)),  
-        #     'token': account_activation_token.make_token(user),  
-        # })  
-        # email = EmailMessage(mail_subject, message, to=[email])  
-        # email.send() 
+    if username is None or password is None:
+        return JsonResponse({ "message": "missing fields" }, status=406)
+    # is_active forced to be true for development reasons
+    user = User.objects.create_user(email=email, username=username, password=password, is_active=True)
+    
+    # return HttpResponse('You are successfully signed in!')
+    return JsonResponse({"email": email, "pass": password})
+    # current_site = get_current_site(request)  
+    # mail_subject = 'PallasCat: Activation link'  
+    # message = render_to_string('acc_active_email.html', {  
+    #     'user': user,  
+    #     'domain': current_site.domain,  
+    #     'uid': urlsafe_base64_encode(force_bytes(user.pk)),  
+    #     'token': account_activation_token.make_token(user),  
+    # })  
+    # email = EmailMessage(mail_subject, message, to=[email])  
+    # email.send() 
 
-        # return HttpResponse('Please confirm your email address to complete the registration')  
-    else:  
-        return HttpResponse('bajo jajo') 
+    # return HttpResponse('Please confirm your email address to complete the registration')  
 
 def activate(request, uidb64, token):  
     try:  
@@ -78,3 +83,7 @@ def activate(request, uidb64, token):
         return HttpResponse('ok')  
     else:  
         return HttpResponse('not ok')  
+
+def showUsers(request):
+    print(User.objects.values())
+    return HttpResponse(User.objects.values())
