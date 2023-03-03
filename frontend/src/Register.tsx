@@ -18,5 +18,6 @@ export const Register = () => {
 			<input type="password" name="passwordR" id="passwordR" required />
 
 			<button id="register-button">Zarejestruj się</button>
+			<p id="error-msg"></p>
 		</fetcher.Form>	
 )}

@@ -24,8 +24,8 @@ export const Bar = () => {
 		    		<User name="Piroks" />
 			      :
 				<>
-				    <LogReg title="Login" elem={<Login />} />
-				    <LogReg title="Register" elem={<Register />} />
+				    <PopupWithElem title="Login" elem={<Login />} />
+				    <PopupWithElem title="Register" elem={<Register />} />
 				</>
 		    }
                 </span>
@@ -35,7 +35,7 @@ export const Bar = () => {
 }
 
 
-const LogReg = ({title,elem}: {title: string, elem: ReactElement}) => {
+const PopupWithElem = ({title,elem}: {title: string, elem: ReactElement}) => {
 	const [toggled,setToggle] = useState(false)
 
 	return (

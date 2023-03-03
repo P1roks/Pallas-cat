@@ -22,7 +22,6 @@ const router = createBrowserRouter([
 		loader: async() => {
 			let isLogged = await fetch("http://127.0.0.1:8000/api/check/",{credentials: "include"})
 			.then(res => res.text()).then(txt => JSON.parse(txt))
-			console.log(isLogged)
 			return {isLogged: isLogged.logged}
 			// return {isLogged: true}
 		},
@@ -66,6 +65,7 @@ const router = createBrowserRouter([
 				},
 			},
 			{
+				//TODO
 				path: "account",
 				element: <Account />
 			},
@@ -80,9 +80,13 @@ const router = createBrowserRouter([
 						credentials: "include",
 						body: formData,
 					})
-					console.log(status.headers)
+					//TODO: check if the status is actually an error
+					let errorMsg = document.getElementById("error-msg")
+					console.log(errorMsg)
+					if(errorMsg)
+						errorMsg.innerHTML = "Błąd"
 
-					return redirect("/")
+					return redirect(window.location.href)
 				}
 			},
 			{
@@ -96,9 +100,12 @@ const router = createBrowserRouter([
 						credentials: "include",
 						body: formData,
 					}).then(res => res.text())
-					console.log(status)
 
-					return null
+					let errorMsg = document.getElementById("error-msg")
+					if(errorMsg && errorMsg.innerHTML)
+						errorMsg.innerHTML = "Błąd"
+
+					return redirect(window.location.href)
 				}
 			}]
 	}])

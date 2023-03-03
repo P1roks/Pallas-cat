@@ -14,6 +14,8 @@ export const Login = () => {
 			<input type="password" name="password" id="password" required />
 
 			<button id="login-button">Zaloguj się</button>
+
+			<p id="error-msg"></p>
 		</fetcher.Form>	
 	)
 }
