@@ -1,6 +1,6 @@
 import {useLoaderData} from "react-router";
 import {Link} from "react-router-dom";
-import "./video.scss"
+import "./scss/video.scss"
 
 export const Video = () => {
 	const {source,embeddable} = useLoaderData() as {source: string,embeddable: boolean};

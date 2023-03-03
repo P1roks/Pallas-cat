@@ -1,4 +1,4 @@
-import "./bar.scss"
+import "./scss/bar.scss"
 import {ReactElement, useState} from 'react';
 import {useLoaderData} from "react-router";
 import {NavLink} from "react-router-dom";

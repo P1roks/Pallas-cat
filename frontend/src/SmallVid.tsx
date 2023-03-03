@@ -2,7 +2,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import { faStar as filledStar } from "@fortawesome/free-solid-svg-icons"
 import { faStar as outlineStar } from "@fortawesome/free-regular-svg-icons"
 import {Link} from "react-router-dom"
-import "./smallVid.scss"
+import "./scss/smallVid.scss"
 import {useState} from "react"
 //TODO: add platform to props
 interface VidProps {

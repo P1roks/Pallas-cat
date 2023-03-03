@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import {ReactElement} from 'react'
-import './popup.scss'
+import './scss/popup.scss'
 
 
 export const Popup = (props: {children: ReactElement,title: string, onClose: any}) => {

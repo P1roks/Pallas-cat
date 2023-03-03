@@ -1,4 +1,4 @@
-import "./login.scss"
+import "./scss/login.scss"
 import { useFetcher } from "react-router-dom"
 
 //TODO: add onlcick so that is actually works and not just only looks
