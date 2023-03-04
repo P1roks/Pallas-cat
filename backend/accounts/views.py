@@ -22,7 +22,6 @@ def login_view(request) -> JsonResponse:
     username = request.POST.get("email")
     password = request.POST.get("password")
     user = authenticate(request=request,username=username,password=password)
-    # user = User.objects.get(email=email)
 
     if user is not None:
         login(request, user)
