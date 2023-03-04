@@ -1,10 +1,14 @@
 import "./scss/login.scss"
 import { useFetcher } from "react-router-dom"
+import {useRecoilValue} from "recoil";
+import {logRegErr} from "./atoms";
 
 //TODO: add onlcick so that is actually works and not just only looks
 //TODO: (?) add link to register
 export const Login = () => {
+	const err = useRecoilValue(logRegErr);
 	const fetcher = useFetcher();
+
 	return (
 		<fetcher.Form action="/login" id="login" method="post" >
 			<label htmlFor="email">Email:</label>
@@ -15,7 +19,7 @@ export const Login = () => {
 
 			<button id="login-button">Zaloguj się</button>
 
-			<p id="error-msg"></p>
+			<p id="error-msg">{err}</p>
 		</fetcher.Form>	
 	)
 }

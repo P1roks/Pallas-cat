@@ -7,18 +7,19 @@ import {Login} from './Login'
 import {Register} from './Register'
 import {Video, VideoErr} from './Video'
 import {VidGrid} from './VidGrid'
-
-async function logout(){
-	fetch("http://127.0.0.1:8000/api/logout/")
-}
+import {RecoilRoot} from 'recoil'
+import { setRecoil } from 'recoil-nexus'
+import {logRegErr} from './atoms'
+import RecoilNexus from 'recoil-nexus'
 
 const router = createBrowserRouter([
 	{
 	path:"/",
-	element: (<>
-		<Bar />
-		<Outlet />
-		</>),
+	element: (<RecoilRoot>
+			<RecoilNexus />
+			<Bar />
+			<Outlet />
+		</RecoilRoot>),
 		loader: async() => {
 			let isLogged = await fetch("http://127.0.0.1:8000/api/check/",{credentials: "include"})
 			.then(res => res.text()).then(txt => JSON.parse(txt))
@@ -30,9 +31,8 @@ const router = createBrowserRouter([
 				path: "/",
 				element: <div style={{display: "flex",justifyContent:"center",alignItems:"Center", flexDirection: "column"}}>
 					<h1>TODO: insert Random vidoes here</h1>
-					<Link to="/search">search test</Link>
+					<Link to="/search/2/test">search test</Link>
 					<Link to="/watch/1/578237997">watch test</Link>
-					<button onClick={logout}>logout</button>
 				</div>,
 			},
 			{
@@ -81,10 +81,7 @@ const router = createBrowserRouter([
 						body: formData,
 					})
 					//TODO: check if the status is actually an error
-					let errorMsg = document.getElementById("error-msg")
-					console.log(errorMsg)
-					if(errorMsg)
-						errorMsg.innerHTML = "Błąd"
+					setRecoil(logRegErr,"TODO")
 
 					return redirect(window.location.href)
 				}
@@ -100,10 +97,7 @@ const router = createBrowserRouter([
 						credentials: "include",
 						body: formData,
 					}).then(res => res.text())
-
-					let errorMsg = document.getElementById("error-msg")
-					if(errorMsg && errorMsg.innerHTML)
-						errorMsg.innerHTML = "Błąd"
+					setRecoil(logRegErr,"TODO")
 
 					return redirect(window.location.href)
 				}

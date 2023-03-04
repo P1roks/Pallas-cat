@@ -4,6 +4,8 @@ import { faStar as outlineStar } from "@fortawesome/free-regular-svg-icons"
 import {Link} from "react-router-dom"
 import "./scss/smallVid.scss"
 import {useState} from "react"
+import {useSetRecoilState} from "recoil"
+import {lastWatchedTitle} from "./atoms"
 //TODO: add platform to props
 interface VidProps {
     title: string,
@@ -20,6 +22,7 @@ export enum Platform {
 
 export const SmallVid = ({title,img,platform,href}: VidProps) => {
     const [favorite,setFavorite] = useState(false)
+    const setNewTitle = useSetRecoilState(lastWatchedTitle)
 
     const addToFavorite = () => {
     	setFavorite(!favorite)
@@ -29,7 +32,7 @@ export const SmallVid = ({title,img,platform,href}: VidProps) => {
     return (
             <span className="wrapper">
 	    	<FontAwesomeIcon icon={favorite ? filledStar : outlineStar} color="gold" onClick={addToFavorite} className="icon" />
-		<Link to={`/watch/${platform}/${href}`} className="small-vid">
+		<Link to={`/watch/${platform}/${href}`} className="small-vid" onClick={() => setNewTitle(title)}>
 			<img src={img} alt="Cover art" />
 			<span className="text-wrapper">
 			    <p className="title">{title}</p>

@@ -1,14 +1,16 @@
 import {useLoaderData} from "react-router";
 import {Link} from "react-router-dom";
+import {useRecoilState, useRecoilValue} from "recoil";
+import {lastWatchedTitle} from "./atoms";
 import "./scss/video.scss"
 
 export const Video = () => {
 	const {source,embeddable} = useLoaderData() as {source: string,embeddable: boolean};
-	console.log(source,embeddable)
+	const title = useRecoilValue(lastWatchedTitle)
 
 	return (
 		<div id="player">
-			<h1 id="title">title</h1>
+			<h1 id="title">{title}</h1>
 			{embeddable ? 
 				<video src={source} controls></video> :
 				<div id="player-holder">
