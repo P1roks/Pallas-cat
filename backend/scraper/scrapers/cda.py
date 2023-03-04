@@ -44,7 +44,7 @@ def get_stream_url(video_id: str, full_url = False) -> tuple[str,bool] | None:
     res1 = requests.post("https://www.cda.pl/", data=json.dumps(body), headers=headers)
     data = json.loads(res1.text)
     link = data['result']['resp']
-    cache.set(f'vcda{video_id}',link)
+    cache.set(f'vcda{video_id}',(link,True))
     return (data['result']['resp'],True)
 
 def search_videos(query):

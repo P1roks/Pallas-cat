@@ -26,7 +26,7 @@ def get_stream_url(url) -> tuple[str,bool] | None:
     else:
         #TODO
         link = data['url']
-        cache.set(f'vogladaja{url}',link)
+        cache.set(f'vogladaja{url}',(link,False))
         return (data['url'],False)
 
 

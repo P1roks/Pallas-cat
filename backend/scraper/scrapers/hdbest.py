@@ -1,4 +1,3 @@
-from . import cda
 from bs4 import BeautifulSoup
 import json
 import requests
@@ -20,7 +19,7 @@ def get_stream_url(url) -> tuple[str,bool] | None:
         return source
 
     link = source['src']
-    cache.set(f'vhdbest{url}',link)
+    cache.set(f'vhdbest{url}',(link,False))
     return str(source['src']),False
 
 def search_videos(query):
@@ -45,5 +44,5 @@ def search_videos(query):
         links.append({'link': link,'title': title,'cover': cover})
 
     links = json.dumps(links)
-    cache.set(f'cda{query}',links)
+    cache.set(f'hdbest{query}',links)
     return links
