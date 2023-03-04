@@ -1,6 +1,6 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import { faUser } from "@fortawesome/free-solid-svg-icons"
-import "./scss/user.scss"
+import "../scss/user.scss"
 import {Link, useNavigate} from "react-router-dom"
 import {useCallback} from "react"
 

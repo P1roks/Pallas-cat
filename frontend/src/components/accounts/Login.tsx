@@ -1,7 +1,7 @@
-import "./scss/login.scss"
+import "../../scss/login.scss"
 import { useFetcher } from "react-router-dom"
 import {useRecoilValue} from "recoil";
-import {logRegErr} from "./atoms";
+import {logRegErr} from "../../atoms";
 
 //TODO: add onlcick so that is actually works and not just only looks
 //TODO: (?) add link to register

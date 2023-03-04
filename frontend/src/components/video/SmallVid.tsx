@@ -2,10 +2,10 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import { faStar as filledStar } from "@fortawesome/free-solid-svg-icons"
 import { faStar as outlineStar } from "@fortawesome/free-regular-svg-icons"
 import {Link} from "react-router-dom"
-import "./scss/smallVid.scss"
+import "../../scss/smallVid.scss"
 import {useState} from "react"
 import {useSetRecoilState} from "recoil"
-import {lastWatchedTitle} from "./atoms"
+import {lastWatchedTitle} from "../../atoms"
 //TODO: add platform to props
 interface VidProps {
     title: string,

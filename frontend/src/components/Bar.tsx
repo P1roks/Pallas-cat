@@ -1,12 +1,12 @@
-import "./scss/bar.scss"
+import "../scss/bar.scss"
 import {ReactElement, useState} from 'react';
 import {useLoaderData} from "react-router";
 import {NavLink} from "react-router-dom";
 import {Popup} from "./Popup";
-import {Login} from "./Login";
-import {Register} from "./Register";
 import {Search} from "./Search";
 import {User} from "./User";
+import {Login} from "./accounts/Login";
+import {Register} from "./accounts/Register";
 
 export const Bar = () => {
     let {isLogged} = useLoaderData() as {isLogged: boolean}

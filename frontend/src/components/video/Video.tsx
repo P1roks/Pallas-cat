@@ -1,8 +1,8 @@
 import {useLoaderData} from "react-router";
 import {Link} from "react-router-dom";
-import {useRecoilState, useRecoilValue} from "recoil";
-import {lastWatchedTitle} from "./atoms";
-import "./scss/video.scss"
+import {useRecoilValue} from "recoil";
+import {lastWatchedTitle} from "../../atoms";
+import "../../scss/video.scss"
 
 export const Video = () => {
 	const {source,embeddable} = useLoaderData() as {source: string,embeddable: boolean};
