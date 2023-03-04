@@ -2,6 +2,7 @@ from . import cda
 from bs4 import BeautifulSoup
 import json
 import requests
+from django.core.cache import cache
 
 def get_stream_url(url) -> tuple[str,bool] | None:
     outer_res = requests.get(f"https://ogladajanime.pl/anime/{url}")
@@ -19,9 +20,13 @@ def get_stream_url(url) -> tuple[str,bool] | None:
     data = json.loads(json.loads(src_res.text)["data"])
     # This scrape goes depper!
     if 'ebd.cda' in data['url']:
-        return cda.get_stream_url(data['url'],full_url=True)
+        link = cda.get_stream_url(data['url'],full_url=True)
+        cache.set(f'vogladaja{url}',link)
+        return link
     else:
         #TODO
+        link = data['url']
+        cache.set(f'vogladaja{url}',link)
         return (data['url'],False)
 
 
@@ -45,4 +50,6 @@ def search_videos(query):
         cover = cover['data-src']
         links.append({'link': link,'title': title,'cover': cover})
 
+    links = json.dumps(links) 
+    cache.set(f'ogladaja{query}',links)
     return json.dumps(links)

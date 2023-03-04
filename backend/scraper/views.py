@@ -1,5 +1,6 @@
 from django.http import HttpResponse, JsonResponse
 from .scrapers import cda, ogladajanime, hdbest
+from django.core.cache import cache
 
 """
 Platforms:
@@ -12,11 +13,11 @@ def video(request, platform: int, id: str) -> JsonResponse:
     res: tuple[str,bool] | None
     match platform:
         case 1:
-            res = cda.get_stream_url(id)
+            res = cache.get(f'vcda{id}') or cda.get_stream_url(id)
         case 2:
-            res = ogladajanime.get_stream_url(id)
+            res = cache.get(f'vogladaja{id}') or ogladajanime.get_stream_url(id)
         case 3:
-            res = hdbest.get_stream_url(id)
+            res = cache.get(f'vhdbest{id}') or hdbest.get_stream_url(id)
         case _:
             res = ("err",False)
 
@@ -34,11 +35,11 @@ def search(request, platform: int, query: str) -> HttpResponse:
     videos = str()
     match platform:
         case 1:
-            videos = cda.search_videos(query)
+            videos = cache.get(f'cda{query}') or cda.search_videos(query)
         case 2:
-            videos = ogladajanime.search_videos(query)
+            videos = cache.get(f'ogladaja{query}') or ogladajanime.search_videos(query)
         case 3:
-            videos = hdbest.search_videos(query)
+            videos = cache.get(f'hdbest{query}') or hdbest.search_videos(query)
         case _:
             videos = "error"
 

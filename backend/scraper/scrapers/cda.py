@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 import json
 import re
+from django.core.cache import cache
 
 def get_stream_url(video_id: str, full_url = False) -> tuple[str,bool] | None:
     if not full_url:
@@ -42,6 +43,8 @@ def get_stream_url(video_id: str, full_url = False) -> tuple[str,bool] | None:
     headers['Content-Type'] = 'application/json'
     res1 = requests.post("https://www.cda.pl/", data=json.dumps(body), headers=headers)
     data = json.loads(res1.text)
+    link = data['result']['resp']
+    cache.set(f'vcda{video_id}',link)
     return (data['result']['resp'],True)
 
 def search_videos(query):
@@ -87,5 +90,6 @@ def search_videos(query):
             'cover': cover 
         })
 
-
-    return json.dumps(links)
+    links = json.dumps(links)
+    cache.set(f'cda{query}',links)
+    return links
