@@ -1,3 +1,5 @@
+from types import ModuleType
+from django.core.exceptions import BadRequest
 from django.http import HttpResponse, JsonResponse
 from .scrapers import cda, ogladajanime, hdbest
 from django.core.cache import cache
@@ -6,21 +8,52 @@ from django.core.cache import cache
 Platforms:
     1 - CDA
     2 - Ogladajanime
-    3 - Zaluknij
+    3 - hdbest
 """
 
-def video(request, platform: int, id: str) -> JsonResponse:
-    res: tuple[str,bool] | None
+"""
+    Since python's polymorphisim is defacto non existant
+    this seems better that making stateless classes
+    correct me if I'm wrong tho
+
+    scraper module has to have search_videos and get_stream_url functions defined
+"""
+
+def cache_get_video(scraper: ModuleType,id:str) -> tuple[str,bool] | None:
+    cache_str = f'v{scraper.__name__}{id}'
+    cached = cache.get(cache_str)
+    if cached is not None:
+        return cached
+
+    res = scraper.get_stream_url(id)
+    cache.set(cache_str,res)
+    return res
+
+def cache_get_search(scraper: ModuleType,query:str) -> tuple[str,bool] | None:
+    cache_str = f's{scraper.__name__}{query}'
+    cached = cache.get(cache_str)
+    if cached is not None:
+        return cached
+
+    res = scraper.search_videos(query)
+    cache.set(cache_str,res)
+    return res
+
+def get_scraper(platform: int) -> ModuleType:
     match platform:
         case 1:
-            res = cache.get(f'vcda{id}') or cda.get_stream_url(id)
+            return cda
         case 2:
-            res = cache.get(f'vogladaja{id}') or ogladajanime.get_stream_url(id)
+            return ogladajanime
         case 3:
-            res = cache.get(f'vhdbest{id}') or hdbest.get_stream_url(id)
+            return hdbest
         case _:
-            res = ("err",False)
+            raise BadRequest("Invalid scraper!")
 
+def video(request, platform: int, id: str) -> JsonResponse:
+    mod = get_scraper(platform)
+
+    res = cache_get_video(mod,id)
     if res is not None:
         stream_url, embeddable = res
         return JsonResponse({
@@ -32,16 +65,9 @@ def video(request, platform: int, id: str) -> JsonResponse:
         })
 
 def search(request, platform: int, query: str) -> HttpResponse:
-    videos = str()
-    match platform:
-        case 1:
-            videos = cache.get(f'cda{query}') or cda.search_videos(query)
-        case 2:
-            videos = cache.get(f'ogladaja{query}') or ogladajanime.search_videos(query)
-        case 3:
-            videos = cache.get(f'hdbest{query}') or hdbest.search_videos(query)
-        case _:
-            videos = "error"
+    mod = get_scraper(platform)
+
+    videos = cache_get_search(mod,query)
 
     return JsonResponse({
             "videos": videos,

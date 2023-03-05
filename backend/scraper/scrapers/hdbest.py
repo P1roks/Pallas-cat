@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup
 import json
 import requests
-from django.core.cache import cache
 
 HEADERS = {
         'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36',
@@ -18,8 +17,6 @@ def get_stream_url(url) -> tuple[str,bool] | None:
     if source is None:
         return source
 
-    link = source['src']
-    cache.set(f'vhdbest{url}',(link,False))
     return str(source['src']),False
 
 def search_videos(query):
@@ -43,6 +40,4 @@ def search_videos(query):
 
         links.append({'link': link,'title': title,'cover': cover})
 
-    links = json.dumps(links)
-    cache.set(f'hdbest{query}',links)
-    return links
+    return json.dumps(links)
