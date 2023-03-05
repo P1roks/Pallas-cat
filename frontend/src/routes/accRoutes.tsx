@@ -1,9 +1,9 @@
-import {redirect, RouteObject} from "react-router"
-import {setRecoil} from "recoil-nexus"
-import {logRegErr} from "../atoms"
-import {Account} from "../components/accounts/Account"
-import {Login} from "../components/accounts/Login"
-import {Register} from "../components/accounts/Register"
+import { redirect, RouteObject } from "react-router";
+import { setRecoil } from "recoil-nexus";
+import { logRegErr } from "../atoms";
+import { Account } from "../components/accounts/Account";
+import { Login } from "../components/accounts/Login";
+import { Register } from "../components/accounts/Register";
 
 export const accountRoutes: Array<RouteObject> = [
 			{

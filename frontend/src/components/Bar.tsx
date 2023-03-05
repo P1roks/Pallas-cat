@@ -1,12 +1,12 @@
-import "../scss/bar.scss"
-import {ReactElement, useState} from 'react';
-import {useLoaderData} from "react-router";
-import {NavLink} from "react-router-dom";
-import {Popup} from "./Popup";
-import {Search} from "./Search";
-import {User} from "./User";
-import {Login} from "./accounts/Login";
-import {Register} from "./accounts/Register";
+import { ReactElement, useState } from 'react';
+import { useLoaderData } from "react-router";
+import { NavLink } from "react-router-dom";
+import { Popup } from "./Popup";
+import { Search } from "./Search";
+import { User } from "./User";
+import { Login } from "./accounts/Login";
+import { Register } from "./accounts/Register";
+import "../scss/bar.scss";
 
 export const Bar = () => {
     let {isLogged} = useLoaderData() as {isLogged: boolean}
@@ -20,14 +20,14 @@ export const Bar = () => {
                 </NavLink>
                 <span id="rhs">
                     <Search />
-		    {isLogged ?
-		    		<User name="Piroks" />
-			      :
-				<>
-				    <PopupWithElem title="Login" elem={<Login />} />
-				    <PopupWithElem title="Register" elem={<Register />} />
-				</>
-		    }
+					{isLogged ?
+							<User name="Piroks" />
+						:
+						<>
+							<PopupWithElem title="Login" elem={<Login />} />
+							<PopupWithElem title="Register" elem={<Register />} />
+						</>
+					}
                 </span>
             </div>
         </nav>

@@ -1,7 +1,7 @@
-import {useFetcher} from "react-router-dom"
+import { useFetcher } from "react-router-dom";
 
 export const Register = () => {
-	let fetcher = useFetcher()
+	const fetcher = useFetcher();
 
 	return (
 		<fetcher.Form action="/register" id="register" method="post">
@@ -20,4 +20,5 @@ export const Register = () => {
 			<button id="register-button">Zarejestruj się</button>
 			<p id="error-msg"></p>
 		</fetcher.Form>	
-)}
+	)
+}

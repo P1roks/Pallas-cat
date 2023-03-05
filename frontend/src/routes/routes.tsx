@@ -1,9 +1,9 @@
-import {createBrowserRouter, Outlet} from 'react-router-dom'
-import {RecoilRoot} from 'recoil'
-import RecoilNexus from 'recoil-nexus'
-import {Bar} from '../components/Bar'
-import {vidRoutes} from './vidRoutes'
-import {accountRoutes} from './accRoutes'
+import { createBrowserRouter, Outlet } from 'react-router-dom';
+import { RecoilRoot } from 'recoil';
+import RecoilNexus from 'recoil-nexus';
+import { Bar } from '../components/Bar';
+import { vidRoutes } from './vidRoutes';
+import { accountRoutes } from './accRoutes';
 
 export const router = createBrowserRouter([
 	{
@@ -22,4 +22,5 @@ export const router = createBrowserRouter([
 				...vidRoutes,
 				...accountRoutes,
 			]
-	}])
+	}
+])

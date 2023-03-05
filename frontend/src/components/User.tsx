@@ -1,20 +1,21 @@
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import { faUser } from "@fortawesome/free-solid-svg-icons"
-import "../scss/user.scss"
-import {Link, useNavigate} from "react-router-dom"
-import {useCallback} from "react"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { Link, useNavigate } from "react-router-dom";
+import { useCallback } from "react";
+import "../scss/user.scss";
 
 export const User = ({name}: {name: string}) => {
-	const navigate = useNavigate()
+	const navigate = useNavigate();
 	const logout = useCallback(() => {
-		let tryLogout = async() => {
-			let status = await fetch("http://127.0.0.1:8000/api/logout/",{credentials: "include"})
-			.then(res => res.text())
-			.then(txt => JSON.parse(txt).loggedOut as {loggedOut: boolean})
+		const tryLogout = async() => {
+			const status = await fetch("http://127.0.0.1:8000/api/logout/",
+				{ credentials: "include" }
+			).then(res => res.text())
+			.then(txt => JSON.parse(txt).loggedOut as { loggedOut: boolean })
 
-			status && navigate("/")
+			status && navigate("/");
 		}
-		tryLogout()
+		tryLogout();
 	},[])
 
 	return (

@@ -1,12 +1,12 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
-import {useNavigate} from "react-router";
-import {CSSProperties, useRef, useState} from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from "react-router";
+import { CSSProperties, useRef, useState } from "react";
 
 export const Search = () => {
     //Visibility can't be fluently transitioned and elems with opacity 0 can be still clicked, so this is the only real solution 
-    const [visibility,setVisibility] = useState("hidden");
-    const [opacity,setOpacity] = useState(0);
+    const [visibility, setVisibility] = useState("hidden");
+    const [opacity, setOpacity] = useState(0);
     const searchQuery = useRef<HTMLInputElement>(null);
     const selectPlatfom = useRef<HTMLSelectElement>(null);
     const navigate = useNavigate();
@@ -21,13 +21,12 @@ export const Search = () => {
     	if (opacity === 0){
 		setVisibility("visible")
 		setOpacity(100)
-	}
-	else{
-	    //This had to be done so the transition takes effect
-		setOpacity(0);
-		setTimeout(function(){
-			setVisibility("hidden")
-		},500)
+	} else {
+	        //This had to be done so the transition takes effect
+            setOpacity(0);
+            setTimeout(() => {
+                setVisibility("hidden")
+            }, 500)
 	    }
     }
 
