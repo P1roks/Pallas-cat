@@ -1,12 +1,12 @@
 import { useLoaderData } from "react-router";
 import { SmallVid } from "./SmallVid";
-import { Video } from "../../types";
+import { Platform, Video } from "../../types";
 
 export const VidGrid = () => {
-	const { platform, videos } = useLoaderData() as any;
+	const { videos, platform, query } = useLoaderData() as any;
 	const videosJSON: Video[] = JSON.parse(videos);
 
-	const smallVids = videosJSON.map((vid, idx) => 
+	const smallVids = videosJSON?.map((vid, idx) => 
 		<SmallVid 
 			platform={platform} 
 			img={vid.cover} 
@@ -18,9 +18,13 @@ export const VidGrid = () => {
 
 	return (
 		<div id="videos">
-			<span id="container">
+			<div id="query-info">
+				<p>Serwis: {Platform[platform]}</p>
+				<p>Wyszukiwanie: "{query}" (wyników: {videosJSON?.length ?? 0})</p>
+			</div>
+			<div id="container">
 				{smallVids}
-			</span>
+			</div>
 		</div>
 	)
 }

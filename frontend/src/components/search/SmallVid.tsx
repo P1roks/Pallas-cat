@@ -22,18 +22,21 @@ export const SmallVid = ({ title, img, platform, href }: SmallVidProps) => {
 	    	<FontAwesomeIcon 
 				className="icon" 
 				icon={favorite ? filledStar : outlineStar} 
-				color="gold" 
 				onClick={addToFavorite} 
 			/>
+
 			<Link to={`/watch/${platform}/${href}`} 
 				className="small-vid" 
 				onClick={() => setNewTitle(title)}
 				title={title}
 			>
 				<img src={img} alt="cover" />
+				<div className="img-data">
+					<span className="length img-info">23:59:59</span>
+					<span className="quality img-info">1080p</span>
+				</div>
 				<span className="text-wrapper">
 					<p className="title">{title}</p>
-					<h6 className="platform">({Platform[platform]})</h6>
 				</span>
 			</Link>
         </div>

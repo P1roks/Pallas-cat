@@ -28,7 +28,7 @@ export const vidRoutes: Array<RouteObject> = [
 					throw new Error(`HTTP err: ${res.status}`)
 
 				const data = await res.json();
-				return { videos: data.videos, platform: params.platform };
+				return { videos: data.videos, platform: params.platform, query: params.query };
 			});
 		},
 	},
