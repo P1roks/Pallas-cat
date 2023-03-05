@@ -12,7 +12,7 @@ export const Login = () => {
 	return (
 		<fetcher.Form action="/login" id="login" method="post" >
 			<label htmlFor="email">Email:</label>
-			<input type="text" name="email" id="email" required />
+			<input type="email" name="email" id="email" required />
 
 			<label htmlFor="password">Hasło:</label>
 			<input type="password" name="password" id="password" required />

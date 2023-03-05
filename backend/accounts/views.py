@@ -19,14 +19,13 @@ from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 @require_http_methods(["POST"])
 def login_view(request) -> JsonResponse:
-    username = request.POST.get("email")
+    email = request.POST.get("email")
     password = request.POST.get("password")
-    user = authenticate(request=request,username=username,password=password)
+    user = authenticate(request=request,email=email,password=password)
 
     if user is not None:
         login(request, user)
         res = JsonResponse({ "message": "ok" })
-        res.set_cookie('test','1')
         return res
     else:
         return JsonResponse({ "message": "not ok" })
