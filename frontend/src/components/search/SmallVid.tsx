@@ -5,23 +5,10 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { lastWatchedTitle } from "../../atoms";
+import { Platform, SmallVidProps } from "../../types";
 import "../../scss/smallVid.scss";
 
-//TODO: add platform to props
-interface VidProps {
-    title: string,
-    img: string,
-    href: string,
-    platform: Platform,
-}
-
-export enum Platform {
-	CDA = 1,
-	OgladajAnime,
-	hdbest,
-}
-
-export const SmallVid = ({ title, img, platform, href }: VidProps) => {
+export const SmallVid = ({ title, img, platform, href }: SmallVidProps) => {
     const [favorite, setFavorite] = useState(false);
     const setNewTitle = useSetRecoilState(lastWatchedTitle);
 
@@ -31,23 +18,24 @@ export const SmallVid = ({ title, img, platform, href }: VidProps) => {
     }
 	
     return (
-    	<span className="wrapper">
+    	<div className="wrapper">
 	    	<FontAwesomeIcon 
+				className="icon" 
 				icon={favorite ? filledStar : outlineStar} 
 				color="gold" 
 				onClick={addToFavorite} 
-				className="icon" 
 			/>
 			<Link to={`/watch/${platform}/${href}`} 
 				className="small-vid" 
 				onClick={() => setNewTitle(title)}
+				title={title}
 			>
-				<img src={img} alt="Cover art" />
+				<img src={img} alt="cover" />
 				<span className="text-wrapper">
 					<p className="title">{title}</p>
 					<h6 className="platform">({Platform[platform]})</h6>
 				</span>
 			</Link>
-        </span>
+        </div>
     )
 }

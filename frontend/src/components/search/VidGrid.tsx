@@ -1,11 +1,6 @@
 import { useLoaderData } from "react-router";
 import { SmallVid } from "./SmallVid";
-
-interface Video {
-	link: string,
-	title: string,
-	cover: string,
-}
+import { Video } from "../../types";
 
 export const VidGrid = () => {
 	const { platform, videos } = useLoaderData() as any;
