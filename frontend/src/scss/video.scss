@@ -1,15 +1,18 @@
-#player{
+#player {
 	display:flex;
 	flex-direction: column;
 	align-items: center;
 	height: 80%;
-	#title{
+
+	#title {
 		font-size: 3rem;
 	}
-	video,#player-holder{
+
+	video, #player-holder {
 		height: 70%;
 	}
-	#player-holder{
+
+	#player-holder {
 		aspect-ratio: 2 / 1;
 		background: url(/loading.gif) center center no-repeat;
 		background-color: #F1F2F3;
@@ -18,22 +21,26 @@
 			height: 100%;
 		}
 	}
+	
 	//TODO: Make own player
 }
-#err{
-	display:flex;
+
+#err {
+	display: flex;
 	height: 89%;
 	align-items: center;
 	justify-content: center;
-	color:red;
-	span{
+	color: red;
+
+	span {
 		text-align: center;
-		a{
+		a {
 			text-decoration: none;
 			color:blue;
 		}
 	}
-	img{
+
+	img {
 		min-width: 50%;
 	}
 }

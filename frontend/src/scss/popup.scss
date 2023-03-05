@@ -1,4 +1,4 @@
-#popup{
+#popup {
 	z-index: 1;
 	position: absolute;
 	width: 100vw;
@@ -7,27 +7,30 @@
 	left: 0%;
 	background-color: rgba(255,255,255,.02);
 	backdrop-filter: blur(3px);
-	display:flex;
+	display: flex;
 	align-items: center;
 	justify-content: center;
-	#box{
-		width:500px;
+
+	#box {
+		width: 500px;
 		height: 500px;
 		background-color: white;
 		border-radius: 10px;
 		border: 1px solid black;
-		display:flex;
+		display: flex;
 		flex-direction:column;
 		align-items: center;
 		padding: 10px;
 		position: relative;
-		#title{
+
+		#title {
 			border-bottom: 2px solid black;
-			width:100%;
+			width: 100%;
 			text-align: center;
 		}
-		#close{
-			position:absolute;
+
+		#close {
+			position: absolute;
 			left: 95%;
 			cursor: pointer;
 		}

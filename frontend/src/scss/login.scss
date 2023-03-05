@@ -1,16 +1,19 @@
-#login, #register{
+#login, #register {
 	margin-top: 20px;
-	display:flex;
+	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	#login-button{
+
+	#login-button {
 		margin: 100px 0 20px 0;
 	}
-	#register-button{
+
+	#register-button {
 		margin-top: 40px;
 	}
-	button{
+
+	button {
 		border-radius: 10px;
 		padding: 5px;
 		background-color: orange;
