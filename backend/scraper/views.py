@@ -72,3 +72,4 @@ def search(request, platform: int, query: str) -> HttpResponse:
     return JsonResponse({
             "videos": videos,
     })
+

@@ -1,4 +1,5 @@
 from http.client import HTTPResponse
+from django.core.serializers.json import Serializer
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.http.response import json
@@ -16,6 +17,8 @@ from .models import User, Video
 from django.contrib.auth import get_user_model 
 from django.core.mail import EmailMessage  
 from django.views.decorators.csrf import csrf_exempt
+from django.core import serializers
+import random
 
 @csrf_exempt
 @require_http_methods(["POST"])
@@ -111,6 +114,18 @@ def del_favorite(request,platform: int,link: str):
     request.user.videos.remove(vid)
 
     return HttpResponse('TODO')
+
+@csrf_exempt
+def get_random_videos(request,number=20):
+    count = Video.objects.count() - 1
+    number = count - 1 if number > count else number
+    random_indices = random.sample(range(1,count),number)
+    all_vids = Video.objects.all()
+
+    random_vids = [all_vids[idx] for idx in random_indices]
+    json_vids = serializers.serialize("json",random_vids)
+
+    return HttpResponse(json.dumps(json_vids))
 
 # DEBUG VIEW: DELETE @ RELEASE
 def showUsers(request):
