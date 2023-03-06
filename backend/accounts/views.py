@@ -125,7 +125,7 @@ def get_random_videos(request,number=20):
     random_vids = [all_vids[idx] for idx in random_indices]
     json_vids = serializers.serialize("json",random_vids)
 
-    return HttpResponse(json.dumps(json_vids))
+    return HttpResponse(json_vids)
 
 # DEBUG VIEW: DELETE @ RELEASE
 def showUsers(request):

@@ -12,6 +12,7 @@ export interface Video {
 	link: string,
 	title: string,
 	cover: string,
+	platform?: Platform,
 }
 
 // SmallVid properties

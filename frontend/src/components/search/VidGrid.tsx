@@ -3,11 +3,11 @@ import { SmallVid } from "./SmallVid";
 import { Platform, Video } from "../../types";
 
 export const VidGrid = () => {
-	const { videos, platform, query } = useLoaderData() as {videos: Video[], platform: Platform,query: string};
+	const { videos, platform, query } = useLoaderData() as {videos: Video[], platform: number,query: string};
 
 	const smallVids = videos.map((vid, idx) => 
 		<SmallVid 
-			platform={platform} 
+			platform={platform ? platform : vid.platform} 
 			img={vid.cover} 
 			title={vid.title} 
 			href={vid.link} 
