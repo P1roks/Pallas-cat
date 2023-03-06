@@ -3,10 +3,9 @@ import { SmallVid } from "./SmallVid";
 import { Platform, Video } from "../../types";
 
 export const VidGrid = () => {
-	const { videos, platform, query } = useLoaderData() as any;
-	const videosJSON: Video[] = JSON.parse(videos);
+	const { videos, platform, query } = useLoaderData() as {videos: Video[], platform: Platform,query: string};
 
-	const smallVids = videosJSON?.map((vid, idx) => 
+	const smallVids = videos.map((vid, idx) => 
 		<SmallVid 
 			platform={platform} 
 			img={vid.cover} 
@@ -18,10 +17,13 @@ export const VidGrid = () => {
 
 	return (
 		<div id="videos">
+		{
+			query &&
 			<div id="query-info">
 				<p>Serwis: {Platform[platform]}</p>
-				<p>Wyszukiwanie: "{query}" (wyników: {videosJSON?.length ?? 0})</p>
+				<p>Wyszukiwanie: "{query}" (wyników: {videos?.length ?? 0})</p>
 			</div>
+		}
 			<div id="container">
 				{smallVids}
 			</div>

@@ -5,17 +5,33 @@ import {VidGrid} from "../components/search/VidGrid";
 
 export const vidRoutes: Array<RouteObject> = [
 	{
-		path: "/",
+		path: "/debug",
 		element: <div style={{
 			display: "flex",
 			justifyContent: "center",
 			alignItems: "center", 
 			flexDirection: "column"
 		}}>
-			<h1>TODO: insert Random videos here</h1>
+			<h1>DEBUG PATH</h1>
 			<Link to="/search/2/test">search test</Link>
 			<Link to="/watch/1/578237997">watch test</Link>
 		</div>,
+	},
+	{
+		path: "/",
+		element: <VidGrid />,
+		loader: async() => {
+			return fetch("http://127.0.0.1:8000/api/random/")
+			.then(async(res:Response) => {
+				if (!res.ok)
+					throw new Error(`HTTP err: ${res.status}`)
+
+				const data = JSON.parse(await res.json()).map(single => single.fields)
+				//TODO: separate videos into groups as currently, videos with wrong dimensions can appear side by side
+
+				return {videos: data}
+			})
+		}
 	},
 	{
 		path: "search/:platform/:query",
@@ -28,7 +44,9 @@ export const vidRoutes: Array<RouteObject> = [
 					throw new Error(`HTTP err: ${res.status}`)
 
 				const data = await res.json();
-				return { videos: data.videos, platform: params.platform, query: params.query };
+				const videos = JSON.parse(data.videos)
+				console.log(videos)
+				return { videos: videos, platform: params.platform, query: params.query };
 			});
 		},
 	},
