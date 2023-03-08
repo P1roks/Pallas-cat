@@ -2,6 +2,7 @@ import {RouteObject} from "react-router";
 import {Link} from "react-router-dom";
 import {Video, VideoErr} from "../components/player/Video";
 import {VidGrid} from "../components/search/VidGrid";
+import {VidMain} from "../components/search/VidMain";
 
 export const vidRoutes: Array<RouteObject> = [
 	{
@@ -19,7 +20,7 @@ export const vidRoutes: Array<RouteObject> = [
 	},
 	{
 		path: "/",
-		element: <VidGrid />,
+		element: <VidMain />,
 		loader: async() => {
 			return fetch("http://127.0.0.1:8000/api/random/")
 			.then(async(res:Response) => {

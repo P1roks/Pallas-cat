@@ -7,7 +7,8 @@ export const VidGrid = () => {
 
 	const smallVids = videos.map((vid, idx) => 
 		<SmallVid 
-			platform={platform ? platform : vid.platform} 
+			displayPlatform={false}
+			platform={platform}
 			img={vid.cover} 
 			title={vid.title} 
 			href={vid.link} 
@@ -17,14 +18,11 @@ export const VidGrid = () => {
 
 	return (
 		<div id="videos">
-		{
-			query &&
 			<div id="query-info">
 				<p>Serwis: {Platform[platform]}</p>
 				<p>Wyszukiwanie: "{query}" (wyników: {videos?.length ?? 0})</p>
 			</div>
-		}
-			<div id="container">
+			<div className="vid-wrapper">
 				{smallVids}
 			</div>
 		</div>

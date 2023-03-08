@@ -12,11 +12,15 @@ export interface Video {
 	link: string,
 	title: string,
 	cover: string,
-	platform?: Platform,
+}
+
+export interface VideoPlatform extends Video{
+	platform: Platform,
 }
 
 // SmallVid properties
 export interface SmallVidProps {
+    displayPlatform: boolean,
     title: string,
     img: string,
     href: string,

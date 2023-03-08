@@ -14,8 +14,11 @@
 			margin: 0;
 		}
 	}
+	.vid-group-wrapper{
+		margin-bottom: 5%;
+	}
 
-	#container {
+	.vid-wrapper {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 		gap: 50px;
