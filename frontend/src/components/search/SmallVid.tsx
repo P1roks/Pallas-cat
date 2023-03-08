@@ -2,27 +2,45 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as filledStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as outlineStar } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { lastWatchedTitle } from "../../atoms";
 import { Platform, SmallVidProps } from "../../types";
 import "../../scss/smallVid.scss";
 
-export const SmallVid = ({ title, img, platform, href }: SmallVidProps) => {
+export const SmallVid = ({ title, img, platform, href, displayPlatform }: SmallVidProps) => {
     const [favorite, setFavorite] = useState(false);
     const setNewTitle = useSetRecoilState(lastWatchedTitle);
 
-    const addToFavorite = () => {
-    	setFavorite(!favorite)
-		//TODO: implement this
-    }
+    const deleteFavorite = useCallback(() => {
+	const del = async() => {
+		await fetch(`http://127.0.0.1:8000/api/favorite/${platform}/${href}`,
+		{
+			credentials: "include",method: "delete",
+			headers: {"Content-Type": "application/json"},
+		})
+	}
+	del()
+    },[])
+
+    const addFavorite = useCallback(() => {
+	const add = async() => {
+		await fetch("http://127.0.0.1:8000/api/favorite/",
+		{
+			credentials: "include",method: "post",
+			headers: {"Content-Type": "application/json"},
+			body: JSON.stringify({platform,link: href,title,cover: img})
+		})
+	}
+	add()
+    },[])
 	
     return (
     	<div className="wrapper">
 	    	<FontAwesomeIcon 
 				className="icon" 
 				icon={favorite ? filledStar : outlineStar} 
-				onClick={addToFavorite} 
+				onClick={() => {favorite ? deleteFavorite() : addFavorite(); setFavorite(!favorite)} } 
 			/>
 
 			<Link to={`/watch/${platform}/${href}`} 
@@ -36,7 +54,7 @@ export const SmallVid = ({ title, img, platform, href }: SmallVidProps) => {
 					<span className="quality img-info">1080p</span>
 				</div>
 				<span className="text-wrapper">
-					<p className="title">{title}</p>
+					<p className="title">{title} {displayPlatform && `(${Platform[platform]})`}</p>
 				</span>
 			</Link>
         </div>
