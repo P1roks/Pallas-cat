@@ -1,6 +1,7 @@
 import { useLoaderData } from "react-router";
 import { SmallVid } from "./SmallVid";
 import { VideoPlatform } from "../../types";
+import {VidGroup} from "./VidGroup";
 
 export const VidMain = () => {
 	const {videos} = useLoaderData() as {videos: VideoPlatform[]};
@@ -24,19 +25,8 @@ export const VidMain = () => {
 
 	return (
 		<div id="videos">
-			<div className="vid-group-wrapper">
-				<h1>Popularne Filmy i Seriale</h1>
-				<div className="vid-wrapper">
-					{smallVids}
-				</div>
-			</div>
-
-			<div className="vid-group-wrapper">
-				<h1>Popularne Anime</h1>
-				<div className="vid-wrapper">
-					{bigVids}
-				</div>
-			</div>
+			<VidGroup titleElem={ <h1>Popularne Filmy i Seriale</h1> }>{smallVids}</VidGroup>
+			<VidGroup titleElem={ <h1>Popularne Anime</h1> }>{bigVids}</VidGroup>
 		</div>
 	)
 }

@@ -1,4 +1,5 @@
 import { ReactElement } from "react";
+import { SmallVid } from "../components/video/SmallVid";
 
 // All avaiable platforms
 export enum Platform {
@@ -25,6 +26,14 @@ export interface SmallVidProps {
     img: string,
     href: string,
     platform: Platform,
+}
+
+//TODO: fix this type error somehow
+// VidGroup properties
+export interface VidGroupProps{
+	titleElem: ReactElement,
+	children: any
+	//children: ReactElement | null
 }
 
 // Popup's properties

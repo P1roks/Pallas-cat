@@ -1,8 +1,8 @@
 import {RouteObject} from "react-router";
 import {Link} from "react-router-dom";
 import {Video, VideoErr} from "../components/player/Video";
-import {VidGrid} from "../components/search/VidGrid";
-import {VidMain} from "../components/search/VidMain";
+import {VidGrid} from "../components/video/VidGrid";
+import {VidMain} from "../components/video/VidMain";
 
 export const vidRoutes: Array<RouteObject> = [
 	{
