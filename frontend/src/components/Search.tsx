@@ -31,19 +31,23 @@ export const Search = () => {
     }
 
     return (
-        <span id="search">
+        <div id="search">
             <form action="#" id="form-search" method="POST" style={{visibility: visibility, opacity: opacity} as CSSProperties} onSubmit={e => {e.preventDefault(); search();}}>
+                <input type="text" name="input_search" id="input-search"
+                placeholder="Wpisz tytuł filmu..." ref={searchQuery} />
                 <select name="select-search" id="select-search" ref={selectPlatfom}>
                     <option value="1">CDA</option>
                     <option value="2">OgladajAnime</option>
                     <option value="3">hdbest</option>
                 </select>
-                <input type="text" name="input_search" id="input-search"
-                placeholder="Wpisz swoje wyszukiwanie..." ref={searchQuery} />
             </form>
-            <button id="button-search" onClick={(_) => searchQuery.current && searchQuery.current.value !== "" ? search() : changeVisibility()} >
+            <button id="button-search" style={opacity === 100 ? {backgroundColor: "#4b4b4b"} : {}}
+                onClick={() => 
+                    searchQuery.current && searchQuery.current.value !== "" 
+                    ? search() : changeVisibility()
+                }>
                 <FontAwesomeIcon icon={faMagnifyingGlass} size="xl" />
             </button>
-        </span>
+        </div>
     )
 }

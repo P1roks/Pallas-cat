@@ -1,14 +1,13 @@
 #bar {
-    height: 11%;
+    height: 14%;
+    color: white;
     background-color: #212121;
-    padding: 1% 0;
-    box-shadow: 0 1px 0 0 rgb(17 17 17 / 7%);
 
     #container {
+        height: 100%;
         display: flex;
-        justify-content: space-between;
-        gap: 50px;
         align-items: center;
+        justify-content: space-between;
         margin: 0 10%;
 
         img {
@@ -21,14 +20,16 @@
             justify-content: center;
             align-items: center;
             text-decoration: none;
-            color:black;
+            color: black;
             filter: invert(1);
         }
 
         #rhs {
-            display:flex;
-            gap: 20px;
+            display: flex;
+            flex-direction: row;
             align-items: center;
+            justify-content: space-around;
+            gap: 20px;
 
             a {
                 color:black;
@@ -37,30 +38,41 @@
         }
 
         #search {
+            display: flex;
+            align-items: stretch;
+            justify-items: stretch;
+
             #button-search {
-                border-radius: 50%;
-                cursor:pointer;
-                padding: 15px;
+                display: block;
+                cursor: pointer;
                 border: none;
-                background-color: orange;
+                padding: 6px 16px;
+                border-top-right-radius: 1rem;
+                border-bottom-right-radius: 1rem;
+                background-color: #212121;
+                // background-color: #4b4b4b;
+                transition: background-color .5s ease-in-out;
 
                 svg {
-                    filter: invert(1);
+                    color: white;
                 }
             }
-            #form-search {
-                margin-left: 10px;
-                display: inline-block;
-                transition: opacity .5s ease-in-out;
 
-                #input-search {
-                    border: none;
-                    border-bottom: 1px solid black;
+            #form-search {
+                display: flex;
+                transition: opacity .5s ease-in-out;
+        
+                #select-search, #input-search {
+                    border: 1px solid #4b4b4b;
+                    background-color: #313131;
+                    color: #fff;
+                    outline: none;
+                    padding: 4px 12px;
                 }
 
-                #input-search::placeholder {
-                    border: none;
-                    border-bottom: 1px solid black;
+                #input-search {
+                    border-top-left-radius: 1rem;
+                    border-bottom-left-radius: 1rem;
                 }
             }
         }
