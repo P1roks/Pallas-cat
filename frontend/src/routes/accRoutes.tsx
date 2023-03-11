@@ -9,7 +9,20 @@ export const accountRoutes: Array<RouteObject> = [
 			{
 				//TODO
 				path: "account",
-				element: <Account />
+				element: <Account />,
+				loader: async() => {
+					return fetch("http://127.0.0.1:8000/api/fav_vids/",{
+						credentials: "include"
+					})
+					.then(async(res:Response) => {
+						if (!res.ok)
+							throw new Error(`HTTP err: ${res.status}`)
+
+						const data = (await res.json()).map(single => single.fields)
+
+						return {videos: data}
+					})
+				}
 			},
 			{
 				path: "login",

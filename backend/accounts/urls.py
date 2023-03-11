@@ -12,4 +12,5 @@ urlpatterns = [
     path('favorite/<int:platform>/<path:link>', views.del_favorite, name='del_fav'),
     path('random/',views.get_random_videos),
     path('show/',views.showUsers),
+    path('fav_vids/',views.fav_vids),
 ]

@@ -28,8 +28,6 @@ export const vidRoutes: Array<RouteObject> = [
 					throw new Error(`HTTP err: ${res.status}`)
 
 				const data = (await res.json()).map(single => single.fields)
-				console.log(data)
-				//TODO: separate videos into groups as currently, videos with wrong dimensions can appear side by side
 
 				return {videos: data}
 			})

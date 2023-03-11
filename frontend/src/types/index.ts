@@ -26,6 +26,7 @@ export interface SmallVidProps {
     img: string,
     href: string,
     platform: Platform,
+    fav?: boolean,
 }
 
 //TODO: fix this type error somehow

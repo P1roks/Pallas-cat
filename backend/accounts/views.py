@@ -127,6 +127,16 @@ def get_random_videos(request,number=20):
 
     return HttpResponse(json_vids)
 
+@csrf_exempt
+def fav_vids(request):
+    if not request.user.is_authenticated:
+        return HttpResponse("You are not logged in!")
+    
+    fav_vids = request.user.videos.all()
+    fav_vids_json = serializers.serialize("json",fav_vids)
+
+    return HttpResponse(fav_vids_json)
+
 # DEBUG VIEW: DELETE @ RELEASE
 def showUsers(request):
     print(User.objects.values())

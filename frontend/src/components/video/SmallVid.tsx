@@ -8,8 +8,8 @@ import { lastWatchedTitle } from "../../atoms";
 import { Platform, SmallVidProps } from "../../types";
 import "../../scss/smallVid.scss";
 
-export const SmallVid = ({ title, img, platform, href, displayPlatform }: SmallVidProps) => {
-    const [favorite, setFavorite] = useState(false);
+export const SmallVid = ({ title, img, platform, href, displayPlatform, fav }: SmallVidProps) => {
+    const [favorite, setFavorite] = useState(fav ?? false);
     const setNewTitle = useSetRecoilState(lastWatchedTitle);
 
     const deleteFavorite = useCallback(() => {
