@@ -1,5 +1,6 @@
 from http.client import HTTPResponse
 from django.core.serializers.json import Serializer
+from django.db import IntegrityError
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.http.response import json
@@ -29,16 +30,16 @@ def login_view(request) -> JsonResponse:
 
     if user is not None:
         login(request, user)
-        res = JsonResponse({ "message": "ok" })
+        res = JsonResponse({ "message": "Pomyślnie zalogowano!" })
         return res
     else:
-        return JsonResponse({ "message": "not ok" })
+        return JsonResponse({ "message": "Niepoprawny email/hasło" }, status=406)
 
 def is_logged(request) -> JsonResponse:
     if not request.user.is_authenticated:
         return JsonResponse({ "logged": False })
     else: 
-        return JsonResponse({ "logged": True, "is_active": request.user.is_active})
+        return JsonResponse({ "logged": True, "is_active": request.user.is_active, "username": request.user.username})
 
 def logout_view(request):
     if not request.user.is_authenticated:
@@ -54,12 +55,17 @@ def signup(request):
     username = request.POST.get("username")
     password = request.POST.get("password")
     if username is None or password is None:
-        return JsonResponse({ "message": "missing fields" }, status=406)
+        return JsonResponse({ "message": "Nie wszystkie pola zostały wypełnione" }, status=406)
     # is_active forced to be true for development reasons
-    user = User.objects.create_user(email=email, username=username, password=password, is_active=True)
+    user: User
+    try:
+        user = User.objects.create_user(email=email, username=username, password=password, is_active=True)
+    except IntegrityError:
+        return JsonResponse({"message": "Na podany email zostało już utworzone konto"}, status=406)
     
+    return JsonResponse({"message": "Pomyślnie zarejestrowano!"})
     # return HttpResponse('You are successfully signed in!')
-    return JsonResponse({"email": email, "pass": password})
+    # return JsonResponse({"email": email, "pass": password})
     # current_site = get_current_site(request)  
     # mail_subject = 'PallasCat: Activation link'  
     # message = render_to_string('acc_active_email.html', {  
@@ -90,7 +96,7 @@ def activate(request, uidb64, token):
 @csrf_exempt
 def add_favorite(request):
     if not request.user.is_authenticated:
-        return HttpResponse("you must be logged in to add to fav")
+        return HttpResponse("Musisz być zalogowany aby dodać/usunąć z ulubionych")
 
     data = json.loads(request.body)
     platform = int(data['platform'])
@@ -108,7 +114,7 @@ def add_favorite(request):
 @csrf_exempt
 def del_favorite(request,platform: int,link: str):
     if not request.user.is_authenticated:
-        return HttpResponse("you must be logged in to delete fav")
+        return HttpResponse("Musisz być zalogowany aby dodać/usunąć z ulubionych")
 
     vid = Video.objects.get(platform=platform,link=link)
     request.user.videos.remove(vid)
@@ -130,7 +136,7 @@ def get_random_videos(request,number=20):
 @csrf_exempt
 def fav_vids(request):
     if not request.user.is_authenticated:
-        return HttpResponse("You are not logged in!")
+        return HttpResponse("Musisz być zalogowany aby zobaczyć swoje ulubione filmy!",status=404)
     
     fav_vids = request.user.videos.all()
     fav_vids_json = serializers.serialize("json",fav_vids)

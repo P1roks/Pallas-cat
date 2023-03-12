@@ -53,7 +53,7 @@ export const vidRoutes: Array<RouteObject> = [
 	{
 		path: "watch/:platform/:id",
 		element: <Video />,
-		errorElement: <VideoErr />,
+		// errorElement: <ErrElem />,
 		loader: async({ params }) => {
 			//TEMP URL
 			return fetch(`http://127.0.0.1:8000/api/video/${params.platform}/${params.id}`).then(async (res: Response) => {

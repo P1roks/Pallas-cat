@@ -9,7 +9,7 @@ import { Register } from "./accounts/Register";
 import "../scss/bar.scss";
 
 export const Bar = () => {
-    let {isLogged} = useLoaderData() as {isLogged: boolean}
+    let {isLogged,username} = useLoaderData() as {isLogged: boolean, username?: string}
 
     return (
         <nav id="bar">
@@ -20,14 +20,14 @@ export const Bar = () => {
                 </NavLink>
                 <span id="rhs">
                     <Search />
-					{isLogged ?
-							<User name="Piroks" />
-						:
-						<>
-							<PopupWithElem title="Login" elem={<Login />} />
-							<PopupWithElem title="Register" elem={<Register />} />
-						</>
-					}
+			{isLogged ?
+					<User name={username || "User"} />
+				:
+				<>
+					<PopupWithElem title="Login" elem={<Login />} />
+					<PopupWithElem title="Register" elem={<Register />} />
+				</>
+			}
                 </span>
             </div>
         </nav>

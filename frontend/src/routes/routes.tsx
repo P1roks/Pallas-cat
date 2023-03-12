@@ -16,7 +16,7 @@ export const router = createBrowserRouter([
 		loader: async() => {
 			let isLogged = await fetch("http://127.0.0.1:8000/api/check/",{credentials: "include"})
 			.then(res => res.text()).then(txt => JSON.parse(txt))
-			return {isLogged: isLogged.logged}
+			return {isLogged: isLogged.logged, username: isLogged?.username}
 		},
 		children: [
 				...vidRoutes,

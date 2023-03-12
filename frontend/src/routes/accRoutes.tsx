@@ -7,9 +7,10 @@ import { Register } from "../components/accounts/Register";
 
 export const accountRoutes: Array<RouteObject> = [
 			{
-				//TODO
+				//TODO: make this non copy-paste of VidMain
 				path: "account",
 				element: <Account />,
+				// errorElement: ,
 				loader: async() => {
 					return fetch("http://127.0.0.1:8000/api/fav_vids/",{
 						credentials: "include"
@@ -34,9 +35,13 @@ export const accountRoutes: Array<RouteObject> = [
 						method: "post",
 						credentials: "include",
 						body: formData,
+					}).then(async res => {
+						const json = await res.json()
+						if(!res.ok)
+							setRecoil(logRegErr,{msg: json.message, color: "red"})
+						else
+							setRecoil(logRegErr,{msg: json.message, color: "lime"})
 					})
-					//TODO: check if the status is actually an error
-					setRecoil(logRegErr,"TODO")
 
 					return redirect(window.location.href)
 				}
@@ -51,8 +56,13 @@ export const accountRoutes: Array<RouteObject> = [
 						method: "post",
 						credentials: "include",
 						body: formData,
-					}).then(res => res.text())
-					setRecoil(logRegErr,"TODO")
+					}).then(async res => {
+						const json = await res.json()
+						if(!res.ok)
+							setRecoil(logRegErr,{msg: json.message, color: "red"})
+						else
+							setRecoil(logRegErr,{msg: json.message, color: "lime"})
+					})
 
 					return redirect(window.location.href)
 				}

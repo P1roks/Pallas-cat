@@ -1,6 +1,9 @@
 import { useFetcher } from "react-router-dom";
+import {useRecoilValue} from "recoil";
+import {logRegErr} from "../../atoms";
 
 export const Register = () => {
+	const {msg,color} = useRecoilValue(logRegErr);
 	const fetcher = useFetcher();
 
 	return (
@@ -18,7 +21,7 @@ export const Register = () => {
 			<input type="password" name="passwordR" id="passwordR" required placeholder="4rU3UCj2F0LXAocYTuSKDEA=" />
 
 			<button id="register-button">Zarejestruj się</button>
-			<p id="error-msg"></p>
+			<p id="error-msg" style={{color: color}}>{msg}</p>
 		</fetcher.Form>	
 	)
 }

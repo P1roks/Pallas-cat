@@ -6,7 +6,7 @@ import "../../scss/login.scss";
 //TODO: add onlcick so that is actually works and not just only looks
 //TODO: (?) add link to register
 export const Login = () => {
-	const err = useRecoilValue(logRegErr);
+	const {msg,color} = useRecoilValue(logRegErr);
 	const fetcher = useFetcher();
 
 	return (
@@ -19,7 +19,7 @@ export const Login = () => {
 
 			<button id="login-button">Zaloguj się</button>
 
-			<p id="error-msg">{err}</p>
+			<p id="error-msg" style={{color: color}}>{msg}</p>
 		</fetcher.Form>	
 	)
 }

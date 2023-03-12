@@ -19,7 +19,7 @@ body:has(#popup){
 	#box {
 		background-color: #202020;
 		width: 500px;
-		height: 500px;
+		height: 600px;
 		border-radius: 10px;
 		border: 1px solid gray;
 		display: flex;
@@ -38,6 +38,10 @@ body:has(#popup){
 			position: absolute;
 			left: 95%;
 			cursor: pointer;
+		}
+
+		#error-msg{
+			text-align: center;
 		}
 	}
 }
