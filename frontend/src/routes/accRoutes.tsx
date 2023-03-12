@@ -4,13 +4,14 @@ import { logRegErr } from "../atoms";
 import { Account } from "../components/accounts/Account";
 import { Login } from "../components/accounts/Login";
 import { Register } from "../components/accounts/Register";
+import {ErrElem} from "../components/ErrElem";
 
 export const accountRoutes: Array<RouteObject> = [
 			{
 				//TODO: make this non copy-paste of VidMain
 				path: "account",
 				element: <Account />,
-				// errorElement: ,
+				errorElement: <ErrElem errMsg="Musisz być zalogowany aby zobaczyś swój panel konta!"  />,
 				loader: async() => {
 					return fetch("http://127.0.0.1:8000/api/fav_vids/",{
 						credentials: "include"
@@ -19,7 +20,7 @@ export const accountRoutes: Array<RouteObject> = [
 						if (!res.ok)
 							throw new Error(`HTTP err: ${res.status}`)
 
-						const data = (await res.json()).map(single => single.fields)
+						const data = (await res.json()).map((single: any) => single.fields)
 
 						return {videos: data}
 					})

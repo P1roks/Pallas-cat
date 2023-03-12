@@ -1,6 +1,7 @@
 import {RouteObject} from "react-router";
 import {Link} from "react-router-dom";
-import {Video, VideoErr} from "../components/player/Video";
+import {ErrElem} from "../components/ErrElem";
+import {Video} from "../components/player/Video";
 import {VidGrid} from "../components/video/VidGrid";
 import {VidMain} from "../components/video/VidMain";
 
@@ -53,7 +54,7 @@ export const vidRoutes: Array<RouteObject> = [
 	{
 		path: "watch/:platform/:id",
 		element: <Video />,
-		// errorElement: <ErrElem />,
+		errorElement: <ErrElem errMsg="Przepraszamy, ale to video nie jest dostępne!"/>,
 		loader: async({ params }) => {
 			//TEMP URL
 			return fetch(`http://127.0.0.1:8000/api/video/${params.platform}/${params.id}`).then(async (res: Response) => {

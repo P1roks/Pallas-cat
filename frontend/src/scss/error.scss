@@ -1,0 +1,17 @@
+#err {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: red;
+
+	span {
+		text-align: center;
+		a {
+			color:cyan;
+		}
+	}
+
+	img {
+		max-width: 50%;
+	}
+}

@@ -21,13 +21,3 @@ export const Video = () => {
 		</div>
 	)
 }
-
-export const VideoErr = () => (
-	<div id="err">
-		<img src="/notFound.svg" alt="Error picture"/>
-		<span>
-			<h1> Przepraszamy, ale to video nie jest dostępne! </h1>
-			<Link to="/"> Powrót na stronę główną </Link>
-		</span>
-	</div>
-)
