@@ -17,6 +17,7 @@ body:has(#popup){
 	overflow: hidden;
 
 	#box {
+		z-index: 4;
 		background-color: #202020;
 		width: 500px;
 		height: 600px;

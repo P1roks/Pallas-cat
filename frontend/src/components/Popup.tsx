@@ -5,8 +5,8 @@ import '../scss/popup.scss';
 
 export const Popup = (props: PopupProps) => {
 	return (
-		<div id="popup">
-			<div id="box">
+		<div id="popup" onClick={props.onClose}>
+			<div id="box" onClick={e => e.stopPropagation()}>
 				<FontAwesomeIcon 
 					id="close" 
 					icon={faXmark} 
