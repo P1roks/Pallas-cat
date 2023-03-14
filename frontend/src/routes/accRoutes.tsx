@@ -20,7 +20,7 @@ export const accountRoutes: Array<RouteObject> = [
 						if (!res.ok)
 							throw new Error(`HTTP err: ${res.status}`)
 
-						const data = (await res.json()).map((single: any) => single.fields)
+						const data = await res.json()
 
 						return {videos: data}
 					})

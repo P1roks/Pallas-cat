@@ -38,7 +38,7 @@ def is_logged(request) -> JsonResponse:
     if not request.user.is_authenticated:
         return JsonResponse({ "logged": False })
     else: 
-        fav_vids = list(request.user.videos.values())
+        fav_vids = list(request.user.videos.values_list('link',flat=True))
         return JsonResponse({ "logged": True, "is_active": request.user.is_active, "username": request.user.username, "fav_vids": fav_vids})
 
 def logout_view(request):

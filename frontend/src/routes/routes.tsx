@@ -15,7 +15,11 @@ export const router = createBrowserRouter([
 		</RecoilRoot>),
 		loader: async() => {
 			let isLogged = await fetch("http://127.0.0.1:8000/api/check/",{credentials: "include"})
-			.then(res => res.text()).then(txt => JSON.parse(txt))
+			.then(res => res.json())
+			if(isLogged.fav_vids){
+				localStorage.setItem('favVids', JSON.stringify(isLogged.fav_vids))
+			}
+			
 			return {isLogged: isLogged.logged, username: isLogged?.username}
 		},
 		children: [

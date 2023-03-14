@@ -10,6 +10,7 @@ export const VidMain = () => {
 		vid.platform! !== 1 ? [[...bigThumbnails,vid],smallThumbnails] : [bigThumbnails,[...smallThumbnails,vid]]
 	),[[],[]])
 
+	const favVids = JSON.parse(localStorage.getItem("favVids") ?? "[]") as string[]
 	const mapToVid = (vid: VideoPlatform,idx: number) => 
 		<SmallVid 
 			displayPlatform={true}
@@ -18,6 +19,7 @@ export const VidMain = () => {
 			title={vid.title} 
 			href={vid.link} 
 			key={idx} 
+			favVids={favVids}
 		/>
 
 	const bigVids = bigThumbnails.map(mapToVid);

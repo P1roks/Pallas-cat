@@ -13,7 +13,10 @@ export const User = ({name}: {name: string}) => {
 			).then(res => res.text())
 			.then(txt => JSON.parse(txt).loggedOut as { loggedOut: boolean })
 
-			status && navigate("/");
+			if(status){
+				localStorage.setItem("favVids", "[]")
+				navigate("/")
+			}
 		}
 		tryLogout();
 	},[])
