@@ -69,7 +69,5 @@ def search(request, platform: int, query: str) -> HttpResponse:
 
     videos = cache_get_search(mod,query)
 
-    return JsonResponse({
-            "videos": videos,
-    })
+    return JsonResponse(videos,safe=False)
 

@@ -28,7 +28,7 @@ export const vidRoutes: Array<RouteObject> = [
 				if (!res.ok)
 					throw new Error(`HTTP err: ${res.status}`)
 
-				const data = (await res.json()).map(single => single.fields)
+				const data = await res.json()
 
 				return {videos: data}
 			})
@@ -44,9 +44,7 @@ export const vidRoutes: Array<RouteObject> = [
 				if(!res.ok)
 					throw new Error(`HTTP err: ${res.status}`)
 
-				const data = await res.json();
-				const videos = JSON.parse(data.videos)
-				console.log(videos)
+				const videos = await res.json();
 				return { videos: videos, platform: params.platform, query: params.query };
 			});
 		},

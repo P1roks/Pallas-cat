@@ -18,7 +18,6 @@ from .models import User, Video
 from django.contrib.auth import get_user_model 
 from django.core.mail import EmailMessage  
 from django.views.decorators.csrf import csrf_exempt
-from django.core import serializers
 import random
 
 @csrf_exempt
@@ -39,7 +38,8 @@ def is_logged(request) -> JsonResponse:
     if not request.user.is_authenticated:
         return JsonResponse({ "logged": False })
     else: 
-        return JsonResponse({ "logged": True, "is_active": request.user.is_active, "username": request.user.username})
+        fav_vids = list(request.user.videos.values())
+        return JsonResponse({ "logged": True, "is_active": request.user.is_active, "username": request.user.username, "fav_vids": fav_vids})
 
 def logout_view(request):
     if not request.user.is_authenticated:
@@ -126,22 +126,20 @@ def get_random_videos(request,number=20):
     count = Video.objects.count() - 1
     number = count - 1 if number > count else number
     random_indices = random.sample(range(1,count),number)
-    all_vids = Video.objects.all()
+    all_vids = list(Video.objects.values())
 
     random_vids = [all_vids[idx] for idx in random_indices]
-    json_vids = serializers.serialize("json",random_vids)
 
-    return HttpResponse(json_vids)
+    return JsonResponse(random_vids,safe=False)
 
 @csrf_exempt
 def fav_vids(request):
     if not request.user.is_authenticated:
         return HttpResponse("Musisz być zalogowany aby zobaczyć swoje ulubione filmy!",status=404)
     
-    fav_vids = request.user.videos.all()
-    fav_vids_json = serializers.serialize("json",fav_vids)
+    fav_vids = list(request.user.videos.values())
 
-    return HttpResponse(fav_vids_json)
+    return JsonResponse(fav_vids,safe=False)
 
 # DEBUG VIEW: DELETE @ RELEASE
 def showUsers(request):

@@ -87,4 +87,4 @@ def search_videos(query):
             'cover': cover 
         })
 
-    return json.dumps(links)
+    return links

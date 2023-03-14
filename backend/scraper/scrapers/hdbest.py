@@ -40,4 +40,4 @@ def search_videos(query):
 
         links.append({'link': link,'title': title,'cover': cover})
 
-    return json.dumps(links)
+    return links
