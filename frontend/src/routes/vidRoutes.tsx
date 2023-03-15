@@ -4,6 +4,7 @@ import {ErrElem} from "../components/ErrElem";
 import {Video} from "../components/player/Video";
 import {VidGrid} from "../components/video/VidGrid";
 import {VidMain} from "../components/video/VidMain";
+import {fetchFromApiJson} from "../utils";
 
 export const vidRoutes: Array<RouteObject> = [
 	{
@@ -23,30 +24,20 @@ export const vidRoutes: Array<RouteObject> = [
 		path: "/",
 		element: <VidMain />,
 		loader: async() => {
-			return fetch("http://127.0.0.1:8000/api/random/")
-			.then(async(res:Response) => {
-				if (!res.ok)
-					throw new Error(`HTTP err: ${res.status}`)
-
-				const data = await res.json()
-
-				return {videos: data}
-			})
+			const videos = await fetchFromApiJson("random/");
+			return {videos};
 		}
 	},
 	{
 		path: "search/:platform/:query",
 		element: <VidGrid />,
+		errorElement: <ErrElem />,
 		loader: async({ params }) => {
-			//TEMP URL
-			return fetch(`http://127.0.0.1:8000/api/search/${params.platform}/${params.query}`)
-			.then(async (res: Response) => {
-				if(!res.ok)
-					throw new Error(`HTTP err: ${res.status}`)
+			if(!params.platform || !params.query)
+				throw new Error();
 
-				const videos = await res.json();
-				return { videos: videos, platform: params.platform, query: params.query };
-			});
+			const videos = await fetchFromApiJson("search",params.platform,params.query)
+			return { videos: videos, platform: params.platform, query: params.query };
 		},
 	},
 	{
@@ -54,14 +45,11 @@ export const vidRoutes: Array<RouteObject> = [
 		element: <Video />,
 		errorElement: <ErrElem errMsg="Przepraszamy, ale to video nie jest dostępne!"/>,
 		loader: async({ params }) => {
-			//TEMP URL
-			return fetch(`http://127.0.0.1:8000/api/video/${params.platform}/${params.id}`).then(async (res: Response) => {
-			if(!res.ok)
-				throw new Error(`HTTP err: ${res.status}`)
+			if(!params.platform || !params.id)
+				throw new Error();
 
-			let data = await res.json();
-			return {source: data.streamUrl, embeddable: data.embeddable}
-			})
+			const video = await fetchFromApiJson("video",params.platform,params.id)
+			return {source: video.streamUrl, embeddable: video.embeddable}
 		},
 	},
 ]

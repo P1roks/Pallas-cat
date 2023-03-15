@@ -4,6 +4,7 @@ import RecoilNexus from 'recoil-nexus';
 import { Bar } from '../components/Bar';
 import { vidRoutes } from './vidRoutes';
 import { accountRoutes } from './accRoutes';
+import {fetchFromApiJson} from '../utils';
 
 export const router = createBrowserRouter([
 	{
@@ -14,10 +15,9 @@ export const router = createBrowserRouter([
 			<Outlet />
 		</RecoilRoot>),
 		loader: async() => {
-			let isLogged = await fetch("http://127.0.0.1:8000/api/check/",{credentials: "include"})
-			.then(res => res.json())
+			const isLogged = await fetchFromApiJson("check/");
 			if(isLogged.fav_vids){
-				localStorage.setItem('favVids', JSON.stringify(isLogged.fav_vids))
+				localStorage.setItem('favVids', JSON.stringify(isLogged.fav_vids));
 			}
 			
 			return {isLogged: isLogged.logged, username: isLogged?.username}
