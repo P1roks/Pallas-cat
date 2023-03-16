@@ -41,7 +41,7 @@ export const Search = () => {
                     <option value="3">hdbest</option>
                 </select>
             </form>
-            <button id="button-search" style={opacity === 100 ? {backgroundColor: "#4b4b4b"} : {}}
+            <button id="button-search" style={opacity === 100 ? {backgroundColor: "#373737"} : {}}
                 onClick={() => 
                     searchQuery.current && searchQuery.current.value !== "" 
                     ? search() : changeVisibility()
