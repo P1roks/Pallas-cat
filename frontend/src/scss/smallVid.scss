@@ -10,12 +10,17 @@
 		color: rgb(180, 180, 180);
 
 		p {
-			font-size: 1rem;
+			font-size: 1.12rem;
 			margin: 0;
 		}
 	}
-	.vid-group-wrapper{
+
+	.vid-group-wrapper {
 		margin-bottom: 5%;
+
+		h1 {
+			font-size: 1.2rem;
+		}
 	}
 
 	.vid-wrapper {

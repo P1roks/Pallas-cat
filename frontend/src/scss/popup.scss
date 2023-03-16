@@ -1,4 +1,4 @@
-body:has(#popup){
+body:has(#popup) {
 	overflow: hidden;
 }
 
@@ -41,7 +41,7 @@ body:has(#popup){
 			cursor: pointer;
 		}
 
-		#error-msg{
+		#error-msg {
 			text-align: center;
 		}
 	}

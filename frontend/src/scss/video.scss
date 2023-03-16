@@ -6,7 +6,7 @@
 
 	#title {
 		font-size: 3rem;
-		filter:invert(1);
+		filter: invert(1);
 	}
 
 	video, #player-holder {
@@ -17,7 +17,8 @@
 		aspect-ratio: 2 / 1;
 		background: url(/loading.gif) center center no-repeat;
 		background-color: #F1F2F3;
-		iframe{
+
+		iframe {
 			aspect-ratio: 2 / 1;
 			height: 100%;
 		}
