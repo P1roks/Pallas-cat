@@ -54,7 +54,7 @@ export const Search = () => {
     const buttonSearchStyle = (opacity === 100 ? { backgroundColor } : {});
 
     return (
-        <div className="search panel">
+        <div className="search">
             <form action="#" className="form-search" method="POST" style={{visibility: visibility, opacity: opacity} as CSSProperties} onSubmit={e => {e.preventDefault(); search();}}>
                 <input type="text" name="input_search" className="input-search"
                 placeholder="Wpisz tytuł filmu..." ref={searchQuery} />

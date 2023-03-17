@@ -31,8 +31,7 @@ $bar-height: 8%;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin: 0 5%;
-
+        margin: 0 8%;
 
         img {
             max-height: 5vh;
@@ -137,8 +136,13 @@ $bar-height: 8%;
     }
 }
 
+@media screen and (max-width: 1200px) {
+    .container {
+        margin: 0 4% !important;
+    }
+}
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 1060px) {
     #hamburger {
         visibility: visible !important;
     }
@@ -188,7 +192,7 @@ $bar-height: 8%;
 
         height: calc(100% - $bar-height) !important;
         width: 88%;
-        transition: left .5s ease-in-out;
+        transition: left .3s ease-in-out;
         padding: 2% 0;
     }
 
@@ -198,6 +202,7 @@ $bar-height: 8%;
     }
 
     .search {
+        width: 100%;
         margin: 0 !important;
         margin-bottom: 20px !important;
     }
@@ -215,15 +220,16 @@ $bar-height: 8%;
     }
 
     // remove border radius from search bar
-    .input-search, .button-search {
+    .input-search, .button-search, .select-search {
         border-radius: 0 !important;
         margin: 0 !important;
         padding: 0 !important;
+        border: 0 !important;
+        padding: 4px !important;
     }
 
     .button-search {
         background-color: #2B2B2B;
-        padding: 4px !important;
     }
     
     // CUSTOM CSS ONLY FOR MEDIA QUERIES
