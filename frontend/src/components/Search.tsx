@@ -46,7 +46,7 @@ export const Search = () => {
 
     let backgroundColor = '#000';
     if(theme === 'light') {
-        backgroundColor = "#bcbcbc";
+        backgroundColor = "#dbdbdb";
     } else if(theme === 'dark') {
         backgroundColor = "#373737";
     }

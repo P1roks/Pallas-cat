@@ -24,8 +24,6 @@ export const Bar = () => {
         localStorage.setItem('theme', newTheme);
     };
 
-
-
 	// Hamburger
 	const [isOpen, setOpen] = useState(false);
 	const location = useLocation();
