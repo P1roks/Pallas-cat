@@ -5,9 +5,6 @@
 	align-items: center;
 	justify-content: center;
 	gap: 50px;
-    @include themify($themes) {
-		filter: invert(themed('invert'));
-	}
 
 	.acc-link {
 		display: flex;
@@ -27,7 +24,9 @@
 	}
 
 	.logout-button {
-		color: #000;
+		@include themify($themes) {
+			color: themed('textColor');
+		}
 
 		&:hover {
 			color: #aaa;
@@ -36,10 +35,15 @@
 
 	.icon {
 		height: 35px;
+		@include themify($themes) {
+			color: themed('textColor');
+		}
 	}
 
 	p {
-		color: #000;
+		@include themify($themes) {
+			color: themed('textColor');
+		}
 		margin: 0;
 	}
 

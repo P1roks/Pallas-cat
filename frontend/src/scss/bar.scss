@@ -61,8 +61,11 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            @include themify($themes) {
-                filter: invert(themed('invert'));
+
+            svg {
+                @include themify($themes) {
+                    color: themed('textColor') !important;
+                }
             }
 
             font-size: 1.5rem;
