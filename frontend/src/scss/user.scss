@@ -11,25 +11,11 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-
-		&:hover {
-			svg {
-				color: #aaa;
-			}
-
-			p {
-				color: #aaa;
-			}
-		}
 	}
 
 	.logout-button {
 		@include themify($themes) {
 			color: themed('textColor');
-		}
-
-		&:hover {
-			color: #aaa;
 		}
 	}
 
