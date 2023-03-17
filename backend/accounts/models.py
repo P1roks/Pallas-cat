@@ -9,7 +9,9 @@ class Video(models.Model):
 
     cover = models.TextField()
     title = models.CharField(max_length = 50)
-    link  = models.TextField()
+    link = models.TextField()
+    time = models.TextField()
+    quality = models.TextField()
     platform = models.IntegerField(choices=Platforms.choices)
 
     class Meta:

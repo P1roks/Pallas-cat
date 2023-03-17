@@ -102,7 +102,14 @@ def add_favorite(request):
     platform = int(data['platform'])
     new_fav = Video.objects.filter(platform=platform,link=data['link'])
     if not new_fav:
-        new_fav = Video(cover=data['cover'],link=data['link'],platform=platform,title=data['title'])
+        new_fav = Video(
+            platform=platform,
+            title=data['title'],
+            cover=data['cover'],
+            link=data['link'],
+            time=data['time'],
+            quality=data['quality']
+        )
         new_fav.save()
     else:
         new_fav = new_fav[0]
