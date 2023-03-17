@@ -123,6 +123,8 @@ def del_favorite(request,platform: int,link: str):
 
 @csrf_exempt
 def get_random_videos(request,number=20):
+    if Video.objects.count() < 2:
+        return JsonResponse(list(),safe=False) 
     count = Video.objects.count() - 1
     number = count - 1 if number > count else number
     random_indices = random.sample(range(1,count),number)
