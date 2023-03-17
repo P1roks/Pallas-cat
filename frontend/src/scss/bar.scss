@@ -189,11 +189,11 @@ $bar-height: 8%;
         }
 
         position: fixed;
-        left: -88%;
+        left: -90%;
         top: $bar-height;
 
         height: calc(100% - $bar-height) !important;
-        width: 88%;
+        width: 90%;
         transition: left .3s ease-in-out;
         padding: 2% 0;
     }

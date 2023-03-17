@@ -43,7 +43,7 @@ export const Bar = () => {
 					<img src="/logo.svg" alt="logo" />
 					<b>Pallas Cat</b>
 				</NavLink>
-                <span className="rhs" style={isOpen ? { left: 0 } : { left: "-88%" }}>
+                <span className="rhs" style={isOpen ? { left: 0 } : { left: "-90%" }}>
                     <Search />
 			{isLogged ?
 					<User name={username || "User"} />
