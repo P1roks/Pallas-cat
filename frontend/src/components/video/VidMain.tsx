@@ -7,7 +7,7 @@ export const VidMain = () => {
 	const {videos} = useLoaderData() as {videos: Video[]};
 
 	const [bigThumbnails,smallThumbnails] = videos.reduce(([bigThumbnails,smallThumbnails] : [Video[],Video[]],vid) => (
-		vid.platform! !== 1 ? [[...bigThumbnails,vid],smallThumbnails] : [bigThumbnails,[...smallThumbnails,vid]]
+		vid.platform! === 2 ? [[...bigThumbnails,vid],smallThumbnails] : [bigThumbnails,[...smallThumbnails,vid]]
 	),[[],[]])
 
 	const favVids = JSON.parse(localStorage.getItem("favVids") ?? "[]") as string[]
