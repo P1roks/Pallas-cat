@@ -12,6 +12,11 @@ export const SmallVid = ({ vid, platform, displayPlatform, fav, favVids }: Small
 	const [favorite, setFavorite] = useState(fav ? fav : favVids ? favVids.includes(vid.link) : false);
     const setNewTitle = useSetRecoilState(lastWatchedTitle);
 
+	const setTitle = (title: string): void => {
+		localStorage.setItem('lastTitle',title);
+		setNewTitle(title);
+	}
+
     const deleteFavorite = useCallback(() => {
 	const del = async() => {
 		await fetch(`http://127.0.0.1:8000/api/favorite/${platform}/${vid.link}`,
@@ -51,7 +56,7 @@ export const SmallVid = ({ vid, platform, displayPlatform, fav, favVids }: Small
 
 			<Link to={`/watch/${platform}/${vid.link}`} 
 				className="small-vid" 
-				onClick={() => setNewTitle(vid.title)}
+				onClick={() => setTitle(vid.title)}
 				title={vid.title}
 			>
 				<img src={vid.cover} alt="cover" />
