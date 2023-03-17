@@ -31,12 +31,12 @@ export const vidRoutes: Array<RouteObject> = [
 	{
 		path: "search/:platform/:query",
 		element: <VidGrid />,
-		errorElement: <ErrElem />,
+		errorElement: <ErrElem errMsg="Nic nie znaleziono" />,
 		loader: async({ params }) => {
 			if(!params.platform || !params.query)
 				throw new Error();
 
-			const videos = await fetchFromApiJson("search",params.platform,params.query)
+			const videos = await fetchFromApiJson("search",params.platform,params.query);
 			return { videos: videos, platform: params.platform, query: params.query };
 		},
 	},
