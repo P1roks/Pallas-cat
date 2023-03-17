@@ -38,6 +38,22 @@ def search_videos(query):
         if cover is not None:
             cover = "https://" + str(cover['data-src'][2:])
 
-        links.append({'link': link,'title': title,'cover': cover})
+        time = None
+        time_tag = clip.select_one('.duration')
+        if time_tag is not None:
+            time = time_tag.get_text()
+
+        quality = None
+        quality_tag = clip.select_one('.hd-video')
+        if quality_tag is not None:
+            quality = quality_tag.get_text()
+
+        links.append({
+            'link': link,
+            'title': title,
+            'cover': cover,
+            'time': time,
+            'quality': quality
+        })
 
     return links

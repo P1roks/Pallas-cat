@@ -78,13 +78,25 @@ def search_videos(query):
 
         cover = cover_tag['src']
 
+        time = None
+        time_tag = video_clip.select_one('.timeElem')
+        if time_tag is not None:
+            time = time_tag.get_text()
+
+        quality = None
+        quality_tag = video_clip.select_one('.hd-ico-elem')
+        if quality_tag is not None:
+            quality = quality_tag.get_text()
+
         pattern = re.compile(r'video\/(\w+)')
         id = pattern.findall(link)
 
         links.append({ 
             'link': id[0], 
             'title': title, 
-            'cover': cover 
+            'cover': cover,
+            'time': time,
+            'quality': quality
         })
 
     return links
