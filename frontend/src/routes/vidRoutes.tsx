@@ -41,6 +41,18 @@ export const vidRoutes: Array<RouteObject> = [
 		},
 	},
 	{
+		path: "watch/2/:query/:episode",
+		element: <Video />,
+		errorElement: <ErrElem />,
+		loader: async({ params }) => {
+			if(!params.episode || !params.query)
+				throw new Error();
+
+			const video = await fetchFromApiJson("video","2",params.query,params.episode)
+			return {source: video.streamUrl, embeddable: video.embeddable, nextEpisode: true}
+		},
+	},
+	{
 		path: "watch/:platform/:id",
 		element: <Video />,
 		errorElement: <ErrElem errMsg="Przepraszamy, ale to video nie jest dostępne!"/>,
@@ -49,7 +61,7 @@ export const vidRoutes: Array<RouteObject> = [
 				throw new Error();
 
 			const video = await fetchFromApiJson("video",params.platform,params.id)
-			return {source: video.streamUrl, embeddable: video.embeddable}
+			return {source: video.streamUrl, embeddable: video.embeddable, nextEpisode: params.platform === '2'}
 		},
 	},
 ]
