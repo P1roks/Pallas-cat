@@ -1,13 +1,13 @@
 @import './themeVariables.scss';
 
 #videos {
+	min-height: 100vh;
+	margin: 0 8%;
+	padding: 2% 0;
 	@include themify($themes) {
 		color: themed('textColor');
 	}
-	min-height: 90%;
-	margin: 0 8%;
-	padding: 2% 0;
-
+	
 	#query-info {
 		text-align: center;
 		margin: 1% 0 4% 0;
@@ -78,7 +78,7 @@
 					font-size: .6rem;
 				}
 	
-				.length {
+				.time {
 					right: 18px;
 					bottom: 8px;
 				}
@@ -110,7 +110,7 @@
 				.title {
 					margin: 0 3px;
 					font-size: 1rem;
-					overflow-x: hidden;
+					overflow: hidden;
 					text-overflow: ellipsis;
 					display: -webkit-box;
 					-webkit-line-clamp: 2;
