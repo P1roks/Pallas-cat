@@ -26,13 +26,10 @@ export const Bar = () => {
     return (
         <nav id="bar">
             <div id="container">
-				<div id="lhs">
-					<NavLink to="/" id="logo">
-						<img src="/logo.svg" alt="logo" />
-						<b>Pallas Cat</b>
-					</NavLink>
-
-				</div>
+				<NavLink to="/" id="logo">
+					<img src="/logo.svg" alt="logo" />
+					<b>Pallas Cat</b>
+				</NavLink>
                 <span id="rhs">
                     <Search />
 			{isLogged ?
