@@ -5,15 +5,14 @@ import { VidGroup } from "./VidGroup";
 
 export const VidGrid = () => {
 	const { videos, platform, query } = useLoaderData() as {videos: Video[], platform: number,query: string};
+console.log(videos)
 
 	const favVids = JSON.parse(localStorage.getItem("favVids") ?? "[]") as string[]
 	const smallVids = videos.map((vid, idx) => 
 		<SmallVid 
 			displayPlatform={false}
 			platform={platform}
-			img={vid.cover} 
-			title={vid.title} 
-			href={vid.link} 
+			vid={vid}
 			key={idx} 
 			favVids={favVids}
 		/>

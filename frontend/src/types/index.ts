@@ -10,21 +10,18 @@ export enum Platform {
 
 // Properties of video retrieved from backend
 export interface Video {
+	platform?: Platform,
 	link: string,
 	title: string,
 	cover: string,
-}
-
-export interface VideoPlatform extends Video{
-	platform: Platform,
+	time: string | null,
+	quality: string | null
 }
 
 // SmallVid properties
 export interface SmallVidProps {
     displayPlatform: boolean,
-    title: string,
-    img: string,
-    href: string,
+	vid: Video,
     platform: Platform,
     fav?: boolean,
     favVids?: string[],

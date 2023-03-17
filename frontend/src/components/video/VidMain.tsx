@@ -1,23 +1,21 @@
 import { useLoaderData } from "react-router";
 import { SmallVid } from "./SmallVid";
-import { VideoPlatform } from "../../types";
+import { Video } from "../../types";
 import {VidGroup} from "./VidGroup";
 
 export const VidMain = () => {
-	const {videos} = useLoaderData() as {videos: VideoPlatform[]};
+	const {videos} = useLoaderData() as {videos: Video[]};
 
-	const [bigThumbnails,smallThumbnails] = videos.reduce(([bigThumbnails,smallThumbnails] : [VideoPlatform[],VideoPlatform[]],vid) => (
+	const [bigThumbnails,smallThumbnails] = videos.reduce(([bigThumbnails,smallThumbnails] : [Video[],Video[]],vid) => (
 		vid.platform! !== 1 ? [[...bigThumbnails,vid],smallThumbnails] : [bigThumbnails,[...smallThumbnails,vid]]
 	),[[],[]])
 
 	const favVids = JSON.parse(localStorage.getItem("favVids") ?? "[]") as string[]
-	const mapToVid = (vid: VideoPlatform,idx: number) => 
+	const mapToVid = (vid: Video,idx: number) => 
 		<SmallVid 
 			displayPlatform={true}
-			platform={vid.platform} 
-			img={vid.cover} 
-			title={vid.title} 
-			href={vid.link} 
+			platform={vid.platform!}
+			vid={vid}
 			key={idx} 
 			favVids={favVids}
 		/>

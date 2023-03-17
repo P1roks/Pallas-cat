@@ -1,23 +1,21 @@
 import {useLoaderData} from "react-router";
-import {VideoPlatform} from "../../types";
+import {Video} from "../../types";
 import {SmallVid} from "../video/SmallVid";
 import {VidGroup} from "../video/VidGroup";
 
 //TODO: make this non VidMain copy and probably add a function that forces rerender of video upon deletion 
 export const Account = () => {
-	const {videos} = useLoaderData() as {videos: VideoPlatform[]};
+	const {videos} = useLoaderData() as {videos: Video[]};
 
-	const [bigThumbnails,smallThumbnails] = videos.reduce(([bigThumbnails,smallThumbnails] : [VideoPlatform[],VideoPlatform[]],vid) => (
+	const [bigThumbnails,smallThumbnails] = videos.reduce(([bigThumbnails,smallThumbnails] : [Video[],Video[]],vid) => (
 		vid.platform! !== 1 ? [[...bigThumbnails,vid],smallThumbnails] : [bigThumbnails,[...smallThumbnails,vid]]
 	),[[],[]])
 
-	const mapToVid = (vid: VideoPlatform,idx: number) => 
+	const mapToVid = (vid: Video,idx: number) => 
 		<SmallVid 
 			displayPlatform={true}
-			platform={vid.platform} 
-			img={vid.cover} 
-			title={vid.title} 
-			href={vid.link} 
+			platform={vid.platform!} 
+			vid={vid}
 			key={idx} 
 			fav={true}
 		/>

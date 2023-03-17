@@ -8,14 +8,13 @@ import { lastWatchedTitle } from "../../atoms";
 import { Platform, SmallVidProps } from "../../types";
 import "../../scss/smallVid.scss";
 
-export const SmallVid = ({ title, img, platform, href, displayPlatform, fav, favVids }: SmallVidProps) => {
-    const [favorite, setFavorite] = useState(fav ? fav : favVids ? favVids.includes(href) : false);
+export const SmallVid = ({ vid, platform, displayPlatform, fav, favVids }: SmallVidProps) => {
+	const [favorite, setFavorite] = useState(fav ? fav : favVids ? favVids.includes(vid.link) : false);
     const setNewTitle = useSetRecoilState(lastWatchedTitle);
-
 
     const deleteFavorite = useCallback(() => {
 	const del = async() => {
-		await fetch(`http://127.0.0.1:8000/api/favorite/${platform}/${href}`,
+		await fetch(`http://127.0.0.1:8000/api/favorite/${platform}/${vid.link}`,
 		{
 			credentials: "include",method: "delete",
 			headers: {"Content-Type": "application/json"},
@@ -30,11 +29,17 @@ export const SmallVid = ({ title, img, platform, href, displayPlatform, fav, fav
 		{
 			credentials: "include",method: "post",
 			headers: {"Content-Type": "application/json"},
-			body: JSON.stringify({platform,link: href,title,cover: img})
+			body: JSON.stringify({
+				platform,
+				...vid
+			})
 		})
 	}
 	add()
     },[])
+
+	const spanTime = vid?.time ? <span className="time img-info">{vid.time}</span> : null;
+	const spanQuality = vid?.quality ? <span className="quality img-info">{vid.quality}</span> : null;
 	
     return (
     	<div className="wrapper">
@@ -44,18 +49,18 @@ export const SmallVid = ({ title, img, platform, href, displayPlatform, fav, fav
 				onClick={() => {favorite ? deleteFavorite() : addFavorite(); setFavorite(!favorite)} } 
 			/>
 
-			<Link to={`/watch/${platform}/${href}`} 
+			<Link to={`/watch/${platform}/${vid.link}`} 
 				className="small-vid" 
-				onClick={() => setNewTitle(title)}
-				title={title}
+				onClick={() => setNewTitle(vid.title)}
+				title={vid.title}
 			>
-				<img src={img} alt="cover" />
+				<img src={vid.cover} alt="cover" />
 				<div className="img-data">
-					<span className="length img-info">23:59:59</span>
-					<span className="quality img-info">1080p</span>
+					{spanTime}
+					{spanQuality}
 				</div>
 				<span className="text-wrapper">
-					<p className="title">{title} {displayPlatform && `(${Platform[platform]})`}</p>
+					<p className="title">{vid.title} {displayPlatform && `(${Platform[platform]})`}</p>
 				</span>
 			</Link>
         </div>
