@@ -29,12 +29,12 @@ export const User = ({name}: {name: string}) => {
 	},[])
 
 	return (
-		<div id="user-icon">
-			<Link to="/account" id="acc-link">
-				<FontAwesomeIcon icon={faUser} id="icon" color="black" />
+		<div className="user-icon">
+			<Link to="/account" className="acc-link panel">
+				<FontAwesomeIcon icon={faUser} className="icon" color="black" />
 				<p>{name}</p>
 			</Link>
-			<p onClick={logout} id="logout-button">Wyloguj się</p>
+			<p onClick={logout} className="logout-button panel">Wyloguj się</p>
 		</div>
 	)
 }

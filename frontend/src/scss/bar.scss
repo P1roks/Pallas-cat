@@ -1,13 +1,25 @@
 @import './themeVariables.scss';
 
+$bar-height: 8%;
+
 .bar {
-    height: 8%;
+    height: 8vh;
     color: white;
     font-size: 1rem;
     padding: 0.5% 0;
     @include themify($themes) {
         background-color: themed('barBackground');
         box-shadow: 0 4px 6px themed('barBoxShadow') ;
+    }
+    
+    #hamburger {
+        visibility: hidden;
+        position: absolute;
+        top: 16px;
+        left: 24px;
+        @include themify($themes) {
+            color: themed('textColor');
+        }
     }
 
     p {
@@ -21,11 +33,13 @@
         justify-content: space-between;
         margin: 0 10%;
 
+
         img {
             max-height: 5vh;
         }
 
         .logo {
+            position: relative;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -120,5 +134,109 @@
                 }
             }
         }
+    }
+}
+
+
+@media screen and (max-width: 992px) {
+    #hamburger {
+        visibility: visible !important;
+    }
+
+    .bar {
+        top: 0;
+        position: sticky;
+        width: 100%;
+        z-index: 100;
+    }
+
+    // move text from bottom to left and add gap
+    .acc-link, .logo {
+        flex-direction: row !important;
+        gap: 6px;
+    }
+
+    // display nav bar as rows
+    .container {
+        flex-direction: column;
+        margin: 0 !important;
+
+        .rhs {
+            flex-direction: column !important;
+            gap: 0 !important;
+    
+            .user-icon {
+                flex-direction: column !important;
+                gap: 0 !important;
+                text-align: center;
+            }
+        }
+    }
+
+
+    // CONTAINER
+    .rhs {
+        z-index: 100;
+        @include themify($themes) {
+            background-color: themed('barBackground');
+            box-shadow: 6px 0 4px -2px themed('barBoxShadow');
+        }
+
+        position: fixed;
+        left: -88%;
+        top: $bar-height;
+
+        height: calc(100% - $bar-height) !important;
+        width: 88%;
+        transition: left .5s ease-in-out;
+        padding: 2% 0;
+    }
+
+    .search, .form-search {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .search {
+        margin: 0 !important;
+        margin-bottom: 20px !important;
+    }
+
+    .form-search {
+        select, input {
+            text-align: center;
+        }
+    }
+
+    .user-icon {
+        width: 100%;
+        height: 100%;
+        justify-content: left;
+    }
+
+    // remove border radius from search bar
+    .input-search, .button-search {
+        border-radius: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .button-search {
+        background-color: #2B2B2B;
+        padding: 4px !important;
+    }
+    
+    // CUSTOM CSS ONLY FOR MEDIA QUERIES
+    .panel {
+        width: 100%;
+        margin: 12px 0;
+        padding: 8px 0;
+        @include themify($themes) {
+            background-color: themed('panelBackground') !important;
+        }
+    }
+
+    #videos {
+        padding: 2% + $bar-height;
     }
 }
