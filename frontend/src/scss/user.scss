@@ -1,6 +1,6 @@
 @import './themeVariables.scss';
 
-#user-icon {
+.user-icon {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -9,7 +9,7 @@
 		filter: invert(themed('invert'));
 	}
 
-	#acc-link {
+	.acc-link {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -26,7 +26,7 @@
 		}
 	}
 
-	#logout-button {
+	.logout-button {
 		color: #000;
 
 		&:hover {
@@ -34,7 +34,7 @@
 		}
 	}
 
-	#icon {
+	.icon {
 		height: 35px;
 	}
 

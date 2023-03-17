@@ -1,6 +1,6 @@
 @import './themeVariables.scss';
 
-#bar {
+.bar {
     height: 8%;
     color: white;
     font-size: 1rem;
@@ -14,7 +14,7 @@
         font-weight: 500;
     }
 
-    #container {
+    .container {
         height: 100%;
         display: flex;
         align-items: center;
@@ -25,7 +25,7 @@
             max-height: 5vh;
         }
 
-        #logo {
+        .logo {
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -38,7 +38,7 @@
             }
         }
 
-        #rhs {
+        .rhs {
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -54,7 +54,7 @@
             }
         }
 
-        #theme-switch {
+        .theme-switch {
             border: 0;
             background-color: transparent;
             display: flex;
@@ -69,12 +69,12 @@
             cursor: pointer;
         }
 
-        #search {
+        .search {
             display: flex;
             align-items: stretch;
             justify-items: stretch;
 
-            #button-search {
+            .button-search {
                 display: block;
                 cursor: pointer;
                 border: none;
@@ -94,13 +94,11 @@
                 }
             }
 
-            #form-search {
+            .form-search {
                 display: flex;
                 transition: opacity .5s ease-in-out;
         
-                #select-search, #input-search {
-                    // border: 1px solid #3f3f3f;
-                    // background-color: #2b2b2b;
+                .select-search, .input-search {
                     @include themify($themes) {
                         background-color: themed('searchBackground');
                         border: 1px solid themed('searchBorder');
@@ -113,7 +111,7 @@
                     font-size: 1.1rem;
                 }
 
-                #input-search {
+                .input-search {
                     border-top-left-radius: 1rem;
                     border-bottom-left-radius: 1rem;
                 }
