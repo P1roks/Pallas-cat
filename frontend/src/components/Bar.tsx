@@ -1,5 +1,5 @@
-import { ReactElement, useContext, useRef, useState } from 'react';
-import { useLoaderData } from "react-router";
+import { ReactElement, useContext, useEffect, useRef, useState } from 'react';
+import { useLoaderData, useLocation } from "react-router";
 import { NavLink } from "react-router-dom";
 import { Popup } from "./Popup";
 import { Search } from "./Search";
@@ -24,8 +24,14 @@ export const Bar = () => {
         localStorage.setItem('theme', newTheme);
     };
 
+
+
 	// Hamburger
 	const [isOpen, setOpen] = useState(false);
+	const location = useLocation();
+	useEffect(() => {
+		setOpen(false);
+	}, [location]);
 
 	return (
         <nav className="bar">
