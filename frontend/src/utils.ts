@@ -1,4 +1,11 @@
 
+const isBrowserDefaultDark = () => window.matchMedia('(prefers-color-scheme: dark)').matches;
+export const getDefaultTheme = (): string => {
+	const localStorageTheme = localStorage.getItem('theme');
+	const browserDefault = isBrowserDefaultDark() ? 'dark' : 'light';
+	return localStorageTheme || browserDefault;
+};
+
 //CHANGE URL @ RELEASE
 const BASEURL = "http://127.0.0.1:8000/api"
 

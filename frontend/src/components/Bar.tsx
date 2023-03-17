@@ -9,16 +9,18 @@ import { Register } from "./accounts/Register";
 import "../scss/bar.scss";
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ThemeContext } from '../contexts/themeContext';
 import { Turn as Hamburger } from 'hamburger-react'
+import { useRecoilState } from 'recoil';
+import { theme } from '../atoms';
 
 export const Bar = () => {
     let {isLogged,username} = useLoaderData() as {isLogged: boolean, username?: string}
-    const { theme, setTheme } = useContext(ThemeContext);
 
-	const themeIcon = (theme === "light" ? faMoon : faSun);
+	const [themeVal, setTheme] = useRecoilState(theme);
+
+	const themeIcon = (themeVal === "light" ? faMoon : faSun);
     const handleThemeChange = () => {
-        const isCurrentDark = theme === 'dark';
+        const isCurrentDark = themeVal === 'dark';
         const newTheme = isCurrentDark ? 'light' : 'dark'
         setTheme(newTheme);
         localStorage.setItem('theme', newTheme);

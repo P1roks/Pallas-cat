@@ -2,7 +2,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from "react-router";
 import { CSSProperties, useRef, useState, useContext } from "react";
-import { ThemeContext } from "../contexts/themeContext";
+import { useRecoilValue } from "recoil";
+import { theme } from "../atoms";
 
 export const Search = () => {
     //Visibility can't be fluently transitioned and elems with opacity 0 can be still clicked, so this is the only real solution 
@@ -12,7 +13,7 @@ export const Search = () => {
     const searchQuery = useRef<HTMLInputElement>(null);
     const selectPlatfom = useRef<HTMLSelectElement>(null);
     const navigate = useNavigate();
-    const { theme } = useContext(ThemeContext);
+    const themeVal = useRecoilValue(theme);
 
     const [width, setWidth] = useState(window.innerWidth);
     window.addEventListener('resize', () => {
@@ -45,9 +46,9 @@ export const Search = () => {
     }
 
     let backgroundColor = '#000';
-    if(theme === 'light') {
+    if(themeVal === 'light') {
         backgroundColor = "#dbdbdb";
-    } else if(theme === 'dark') {
+    } else if(themeVal === 'dark') {
         backgroundColor = "#373737";
     }
 
