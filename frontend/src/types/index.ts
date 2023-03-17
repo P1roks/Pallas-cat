@@ -46,5 +46,5 @@ export interface PopupProps {
 export interface VideoLoaderData {
 	source: string,
 	embeddable: boolean,
-	nextEpisode: boolean,
+	isNextEpisode: boolean,
 }

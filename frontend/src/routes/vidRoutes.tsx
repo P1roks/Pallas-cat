@@ -49,7 +49,7 @@ export const vidRoutes: Array<RouteObject> = [
 				throw new Error();
 
 			const video = await fetchFromApiJson("video","2",params.query,params.episode)
-			return {source: video.streamUrl, embeddable: video.embeddable, nextEpisode: true}
+			return {source: video.streamUrl, embeddable: video.embeddable, isNextEpisode: true}
 		},
 	},
 	{
@@ -61,7 +61,7 @@ export const vidRoutes: Array<RouteObject> = [
 				throw new Error();
 
 			const video = await fetchFromApiJson("video",params.platform,params.id)
-			return {source: video.streamUrl, embeddable: video.embeddable, nextEpisode: params.platform === '2'}
+			return {source: video.streamUrl, embeddable: video.embeddable, isNextEpisode: params.platform === '2'}
 		},
 	},
 ]

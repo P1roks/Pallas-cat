@@ -7,11 +7,42 @@
 	min-height: 100vh;
 
 	#title {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
 		text-align: center;
-		margin-top: 20px;
-		font-size: 3rem;
+		margin-top: 5%;
+		width: 70%;
+
+		.buttons {
+			display: flex;
+			justify-content: space-between;
+			width: 100%;
+			gap: 20px;
+			font-size: 1.5rem;
+
+			.episode-button {
+				@include themify($themes) {
+					color: themed('textColor');
+				}
+				text-decoration: none;
+				
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+		}
+
 		@include themify($themes) {
 			color: themed('textColor');
+		}
+
+		h1 {
+			width: 100%;
+			font-size: 3rem;
+			justify-self: center;
+			margin: 0;
 		}
 	}
 
@@ -31,19 +62,14 @@
 			border: 0;
 		}
 	}
-
-	//TODO: style this
-	#next-episode{
-
-	}
-	
-	//TODO: Make own player
 }
 
 @media screen and (max-width: 1200px) {
 	#player {
 		#title {
-			font-size: 2rem;
+			h1 {
+				font-size: 2rem;
+			}
 		}
 	}
 }
@@ -51,7 +77,9 @@
 @media screen and (max-width: 1060px) {
 	#player {
 		#title {
-			font-size: 1.5rem;
+			h1 {
+				font-size: 1.5rem;
+			}
 		}
 	}
 }
