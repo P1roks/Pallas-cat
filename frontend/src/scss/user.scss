@@ -34,7 +34,7 @@
 	}
 
 	.icon {
-		height: 35px;
+		height: 24px;
 		@include themify($themes) {
 			color: themed('textColor');
 		}

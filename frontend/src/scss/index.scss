@@ -8,6 +8,7 @@
 
 html, #root {
     height: 100vh;
+    overflow-x: hidden !important;
 }
 
 :root {
@@ -19,9 +20,15 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
+    @include themify($themes) {
+        background-color: themed('bodyBackground');
+        color: themed('textColor') !important;
+    }
 }
 
 .bg-wrapper {
+    width: 100%;
+    height: 100%; 
     @include themify($themes) {
         background-color: themed('bodyBackground');
         color: themed('textColor') !important;

@@ -24,6 +24,7 @@ $bar-height: 8%;
 
     p {
         font-weight: 500;
+        margin: 0;
     }
 
     .container {
@@ -180,6 +181,8 @@ $bar-height: 8%;
 
     // CONTAINER
     .rhs {
+        justify-content: left !important;
+        text-align: center;
         z-index: 100;
         @include themify($themes) {
             background-color: themed('barBackground');
