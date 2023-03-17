@@ -101,14 +101,16 @@ def add_favorite(request):
     data = json.loads(request.body)
     platform = int(data['platform'])
     new_fav = Video.objects.filter(platform=platform,link=data['link'])
+    time = data['time'] if 'time' in data else ""
+    quality = data['quality'] if 'quality' in data else ""
     if not new_fav:
         new_fav = Video(
             platform=platform,
             title=data['title'],
             cover=data['cover'],
             link=data['link'],
-            time=data['time'],
-            quality=data['quality']
+            time=time,
+            quality=quality
         )
         new_fav.save()
     else:
