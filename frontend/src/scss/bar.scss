@@ -6,7 +6,7 @@ $bar-height: 8%;
     height: 8vh;
     color: white;
     font-size: 1rem;
-    padding: 0.5% 0;
+    padding: 2.5% 0;
     @include themify($themes) {
         background-color: themed('barBackground');
         box-shadow: 0 4px 6px themed('barBoxShadow') ;
@@ -15,7 +15,7 @@ $bar-height: 8%;
     #hamburger {
         visibility: hidden;
         position: absolute;
-        top: 16px;
+        top: 8px;
         left: 24px;
         @include themify($themes) {
             color: themed('textColor');
@@ -31,7 +31,7 @@ $bar-height: 8%;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin: 0 10%;
+        margin: 0 5%;
 
 
         img {
