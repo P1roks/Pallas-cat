@@ -1,8 +1,14 @@
+@import './themeVariables.scss';
+
 #bar {
-    height: 10%;
+    height: 8%;
     color: white;
-    background-color: #1b1b1b;
     font-size: 1rem;
+    padding: 0.5% 0;
+    @include themify($themes) {
+        background-color: themed('barBackground');
+        box-shadow: 0 4px 6px themed('barBoxShadow') ;
+    }
 
     p {
         font-weight: 500;
@@ -25,23 +31,42 @@
             justify-content: center;
             align-items: center;
             text-decoration: none;
-            color: black;
-            filter: invert(1);
             height: 100%;
+            color: #000;
+            @include themify($themes) {
+                filter: invert(themed('invert'));
+            }
         }
 
-        #rhs {
+        #rhs, #lhs {
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: center;
             gap: 60px;
             height: 100%;
+            @include themify($themes) {
+                color: themed('textColor');
+            }
 
             a {
-                color:black;
                 text-decoration: none;
             }
+        }
+
+        #theme-switch {
+            border: 0;
+            background-color: transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            @include themify($themes) {
+                filter: invert(themed('invert'));
+            }
+
+            font-size: 1.5rem;
+            cursor: pointer;
         }
 
         #search {
@@ -56,12 +81,16 @@
                 padding: 6px 16px;
                 border-top-right-radius: 1rem;
                 border-bottom-right-radius: 1rem;
-                background-color: #1b1b1b;
+                @include themify($themes) {
+                    background-color: themed('barBackground');
+                }
                 transition: background-color .5s ease-in-out;
                 font-size: 1.1rem;
 
                 svg {
-                    color: white;
+                    @include themify($themes) {
+                        color: themed('textColor');
+                    }
                 }
             }
 
@@ -70,9 +99,15 @@
                 transition: opacity .5s ease-in-out;
         
                 #select-search, #input-search {
-                    border: 1px solid #3f3f3f;
-                    background-color: #2b2b2b;
-                    color: #fff;
+                    // border: 1px solid #3f3f3f;
+                    // background-color: #2b2b2b;
+                    @include themify($themes) {
+                        background-color: themed('searchBackground');
+                        border: 1px solid themed('searchBorder');
+                    }
+                    @include themify($themes) {
+                        color: themed('textColor');
+                    }
                     outline: none;
                     padding: 4px 12px;
                     font-size: 1.1rem;
@@ -86,4 +121,3 @@
         }
     }
 }
-

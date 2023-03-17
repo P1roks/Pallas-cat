@@ -5,14 +5,17 @@ import { Bar } from '../components/Bar';
 import { vidRoutes } from './vidRoutes';
 import { accountRoutes } from './accRoutes';
 import {fetchFromApiJson} from '../utils';
+import { ThemeWrapper } from '../components/ThemeWrapper';
 
 export const router = createBrowserRouter([
 	{
 	path:"/",
 	element: (<RecoilRoot>
 			<RecoilNexus />
-			<Bar />
-			<Outlet />
+			<ThemeWrapper>
+				<Bar />
+				<Outlet />
+			</ThemeWrapper>
 		</RecoilRoot>),
 		loader: async() => {
 			const isLogged = await fetchFromApiJson("check/");

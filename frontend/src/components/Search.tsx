@@ -1,7 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from "react-router";
-import { CSSProperties, useRef, useState } from "react";
+import { CSSProperties, useRef, useState, useContext } from "react";
+import { ThemeContext } from "../contexts/themeContext";
 
 export const Search = () => {
     //Visibility can't be fluently transitioned and elems with opacity 0 can be still clicked, so this is the only real solution 
@@ -10,6 +11,7 @@ export const Search = () => {
     const searchQuery = useRef<HTMLInputElement>(null);
     const selectPlatfom = useRef<HTMLSelectElement>(null);
     const navigate = useNavigate();
+    const { theme } = useContext(ThemeContext);
 
     const search = () => {
     	if(searchQuery.current && selectPlatfom.current) {
@@ -30,6 +32,10 @@ export const Search = () => {
 	    }
     }
 
+    const buttonSearchStyle = opacity === 100 ? {
+        backgroundColor: (theme === "light" ? "#bcbcbc" : "#373737")
+    } : {}
+
     return (
         <div id="search">
             <form action="#" id="form-search" method="POST" style={{visibility: visibility, opacity: opacity} as CSSProperties} onSubmit={e => {e.preventDefault(); search();}}>
@@ -41,7 +47,7 @@ export const Search = () => {
                     <option value="3">hdbest</option>
                 </select>
             </form>
-            <button id="button-search" style={opacity === 100 ? {backgroundColor: "#373737"} : {}}
+            <button id="button-search" style={buttonSearchStyle}
                 onClick={() => 
                     searchQuery.current && searchQuery.current.value !== "" 
                     ? search() : changeVisibility()

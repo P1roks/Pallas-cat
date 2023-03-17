@@ -1,11 +1,13 @@
+@import './themeVariables.scss';
+
 #user-icon {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	gap: 50px;
-	filter: invert(1);
-
-
+    @include themify($themes) {
+		filter: invert(themed('invert'));
+	}
 
 	#acc-link {
 		display: flex;
@@ -25,7 +27,7 @@
 	}
 
 	#logout-button {
-		color: black;
+		color: #000;
 
 		&:hover {
 			color: #aaa;
@@ -37,6 +39,7 @@
 	}
 
 	p {
+		color: #000;
 		margin: 0;
 	}
 

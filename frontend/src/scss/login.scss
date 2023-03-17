@@ -1,3 +1,5 @@
+@import './themeVariables.scss';
+
 #login, #register {
 	margin-top: 20px;
 	display: flex;
@@ -12,10 +14,13 @@
 	& > input {
 		margin-bottom: 10px;
 		border-width: 0 0 0 0;
-		border-bottom: 1px solid white;
 		background-color: transparent;
-		color: white;
 		text-align: center;
+		font-size: 1.2rem;
+		@include themify($themes) {
+			color: themed('textColor');
+			border-bottom: 1px solid themed('textColor');
+		}
 
 		&::placeholder{
 			color: gray;
@@ -23,10 +28,12 @@
 	}
 
 	button {
+		border: 0;
 		border-radius: 10px;
 		padding: 5px;
 		background-color: orange;
 		font-weight: bold;
 		color:white;
+		font-size: 1.2rem;
 	}
 }

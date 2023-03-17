@@ -31,7 +31,7 @@ export const User = ({name}: {name: string}) => {
 	return (
 		<div id="user-icon">
 			<Link to="/account" id="acc-link">
-				<FontAwesomeIcon icon={faUser} id="icon" />
+				<FontAwesomeIcon icon={faUser} id="icon" color="black" />
 				<p>{name}</p>
 			</Link>
 			<p onClick={logout} id="logout-button">Wyloguj się</p>

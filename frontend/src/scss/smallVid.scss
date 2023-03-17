@@ -1,5 +1,9 @@
+@import './themeVariables.scss';
+
 #videos {
-	color: #fff;
+	@include themify($themes) {
+		color: themed('textColor');
+	}
 	min-height: 90%;
 	margin: 0 8%;
 	padding: 2% 0;
@@ -7,7 +11,9 @@
 	#query-info {
 		text-align: center;
 		margin: 1% 0 4% 0;
-		color: rgb(180, 180, 180);
+		@include themify($themes) {
+			color: themed('queryInfoColor');
+		}
 
 		p {
 			font-size: 1.12rem;
@@ -91,7 +97,9 @@
 				justify-content: center;
 	
 				& > * {
-					color:white;
+					@include themify($themes) {
+						color: themed('textColor');
+					}
 					margin: 0;
 				}
 	

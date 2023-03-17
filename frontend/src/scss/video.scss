@@ -1,12 +1,16 @@
+@import './themeVariables.scss';
+
 #player {
-	display:flex;
+	display: flex;
 	flex-direction: column;
 	align-items: center;
 	height: 80%;
 
 	#title {
 		font-size: 3rem;
-		filter: invert(1);
+		@include themify($themes) {
+			color: themed('textColor');
+		}
 	}
 
 	video, #player-holder {
@@ -21,6 +25,7 @@
 		iframe {
 			aspect-ratio: 2 / 1;
 			height: 100%;
+			border: 0;
 		}
 	}
 	

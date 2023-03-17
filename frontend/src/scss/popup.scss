@@ -1,3 +1,5 @@
+@import './themeVariables.scss';
+
 body:has(#popup) {
 	overflow: hidden;
 }
@@ -18,7 +20,9 @@ body:has(#popup) {
 
 	#box {
 		z-index: 4;
-		background-color: #202020;
+		@include themify($themes) {
+			background-color: themed('popupBackground');
+		}
 		width: 500px;
 		height: 600px;
 		border-radius: 10px;
@@ -30,7 +34,9 @@ body:has(#popup) {
 		position: relative;
 
 		#title {
-			border-bottom: 2px solid white;
+			@include themify($themes) {
+				border-bottom: 2px solid themed('textColor');
+			}
 			width: 100%;
 			text-align: center;
 		}
