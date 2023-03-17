@@ -8,7 +8,7 @@ body:has(#popup) {
 	z-index: 3;
 	position: absolute;
 	width: 100vw;
-	height: 105vh;
+	height: 90vh;
 	top: 0%;
 	left: 0%;
 	background-color: rgba(255,255,255,.02);
@@ -23,8 +23,8 @@ body:has(#popup) {
 		@include themify($themes) {
 			background-color: themed('popupBackground');
 		}
-		width: 500px;
-		height: 600px;
+		width: 400px;
+		height: 500px;
 		border-radius: 10px;
 		border: 1px solid gray;
 		display: flex;
