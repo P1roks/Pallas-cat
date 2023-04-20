@@ -1,6 +1,10 @@
 @import './themeVariables.scss';
 
 #videos {
+	.vid-group-wrapper:nth-child(2) .vid-wrapper .wrapper .small-vid {
+	    width: 400px;
+	}
+
 	min-height: 100vh;
 	margin: 0 8%;
 	padding: 2% 0;
